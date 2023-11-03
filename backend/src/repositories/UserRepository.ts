@@ -14,7 +14,7 @@ export class UserRepository implements IUserRepository {
     let result = await prisma.user.findMany();
     await Promise.all(
       result.map(
-        async (user) =>
+        async (user: IUser) =>
           (user = { ...user, ...(await this.cryptoRepo.useDecryptoUser(user)) })
       )
       
