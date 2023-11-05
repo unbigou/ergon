@@ -4,40 +4,38 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import { Search, ShoppingCart, User } from "lucide-react";
 import { Input } from "../ui/input";
-import { useState } from "react";
+import useProducts from "@/context/useProducts";
 
 export default function Header() {
-  const [hasSearch, setHasSearch] = useState(false);
-
-  const [search, setSearch] = useState("");
+  const { products, setFilteredProducts } = useProducts();
 
   return (
-    <header className="flex justify-between items-center w-full fixed py-4 bg-darkGreen px-60">
+    <header className="flex justify-between items-center w-full fixed z-10 py-4 bg-darkGreen px-60">
       <div className="flex items-center">
         <Image src="/logo.svg" alt="logo" width={150} height={150} />
       </div>
       <div className="flex w-1/3 justify-center items-center gap-4">
-        <div
-          className="flex items-center gap-2 text-white rounded-full p-2 hover:bg-blueGreen cursor-pointer"
-          onClick={() => setHasSearch(true)}
-        >
-          <Search size={20} />
-          <span
-            className={`text-sm transition-all duration-1000 ease-in-out 
-            ${!hasSearch ? "opacity-100" : "w-0 opacity-0"}
-           `}
-          >
-            Pesquisar
-          </span>
-        </div>
+        <Search size={24} className="text-white" />
         <Input
           placeholder="Pesquisar"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className={`${
-            hasSearch ? "opacity-100" : "w-0 opacity-0"
-          } transition-all duration-1000 ease-in-out`}
-          onBlur={() => setHasSearch(false)}
+          onChange={(e) => {
+            setFilteredProducts(
+              e.target.value === ""
+                ? false
+                : products.filter((product) =>
+                    product.name
+                      .normalize("NFD")
+                      .replace(/[\u0300-\u036f]/g, "")
+                      .toLowerCase()
+                      .includes(
+                        e.target.value
+                          .normalize("NFD")
+                          .replace(/[\u0300-\u036f]/g, "")
+                          .toLowerCase()
+                      )
+                  )
+            );
+          }}
         />
       </div>
       <div className="flex items-center gap-4">
