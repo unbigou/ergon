@@ -8,7 +8,7 @@ export default function MainSection() {
   const { products } = useProducts();
 
   return (
-    <div className="w-full bg-gray-100 shadow-xl p-4 gap-4 flex flex-col">
+    <div className="w-full bg-gray-100 shadow-xl p-4 gap-10 flex flex-col">
       <Carrousel
         slides={products.map((product) => (
           <CardsFunc key={product.id} product={product} />
