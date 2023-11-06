@@ -7,10 +7,10 @@
     "build": "npx tsc",
     "start:prod": "node ./dist/main.js",
     "start:dev": "ts-node-dev ./src/main.ts",
-    "create:db": "docker run -d --name ergon -p 5432:5432 -e POSTGRES_PASSWORD=123456 postgres:13.5"
+    "create:db": "docker run -d --name ergon -p 5433:5432 -e POSTGRES_PASSWORD=123456 postgres:13.5"
   },
   "dependencies": {
-    "@prisma/client": "^5.4.2",
+    "@prisma/client": "^5.5.2",
     "@types/bcrypt": "^5.0.1",
     "@types/jsonwebtoken": "^9.0.4",
     "@types/node": "^20.8.10",
