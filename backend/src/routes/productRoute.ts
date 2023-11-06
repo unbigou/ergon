@@ -30,6 +30,10 @@ productRoute.get('/:id', resolveController(async(req: Request, res: Response)=> 
     return await getProductController.handle(req,res)
 }))
 
+productRoute.get('/:type', resolveController(async(req: Request, res: Response)=> {
+    return await getByTypeProductController.handle(req,res)
+}))
+
 productRoute.get('/', resolveController(async(req: Request, res: Response)=> {
     return await listProductController.handle(req,res)
 }))
