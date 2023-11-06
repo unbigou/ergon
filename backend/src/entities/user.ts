@@ -6,9 +6,7 @@ export class User{
     name: IUser['name'];
     email: IUser['email'];
     userType: IUser['userType'];
-    confirmEmail?: IUser['confirmEmail'];
     password: IUser['password'];
-    confirmPassword?: IUser['confirmPassword'];
     cpf: IUser['cpf'];
     phoneNumber: IUser['phoneNumber'];
     gender: IUser['gender'];
@@ -21,9 +19,7 @@ export class User{
         this.name = props.name;
         this.email = props.email;
         this.userType = props.userType;
-        this.confirmEmail = props.confirmEmail;
         this.password = props.password;
-        this.confirmPassword = props.confirmPassword;
         this.cpf = props.cpf;
         this.phoneNumber = props.phoneNumber;
         this.gender = props.gender;
@@ -39,8 +35,6 @@ export class User{
                 email: this.email,
                 password: this.password,
                 userType: this.userType,
-                confirmEmail: this.confirmEmail,
-                confirmPassword: this.confirmPassword,
                 cpf: this.cpf,
                 phoneNumber: this.phoneNumber,
                 gender: this.gender,

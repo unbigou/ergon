@@ -31,7 +31,7 @@ const CardsFunc = ({ product }: CardProps) => {
             width={150}
             height={150}
           />
-          <p>Vithor sexy</p>
+          <p>Vithor</p>
           <div className="text-justify">A descrição é verdadeira!</div>
         </CardContent>
         <CardFooter className="justify-center flex">

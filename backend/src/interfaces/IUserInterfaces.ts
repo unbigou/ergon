@@ -3,9 +3,7 @@ export interface IUser {
     name: string;
     email: string;
     userType: string;
-    confirmEmail?: string;
     password: string;
-    confirmPassword?: string;
     cpf: string;
     phoneNumber: string;
     gender: string;

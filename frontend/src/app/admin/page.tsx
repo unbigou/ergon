@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -6,114 +8,108 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { useState } from "react";
 
-
-export default function Home() {
-const [nomeprod, setNomeprod] = useState('');
-const [precoprod, setPrecoprod] = useState('');
-const [tipoprod, setTipoprod] = useState('');
-const [formprod, setFormprod] = useState('');
-const [cultuprod, setCultuprod] = useState('');
-const [appprod, setAppprod] = useState('');
-
-function MyImageUploader() {
+export default function AdminPage() {
+  const [nomeprod, setNomeprod] = useState("");
+  const [precoprod, setPrecoprod] = useState("");
+  const [tipoprod, setTipoprod] = useState("");
+  const [formprod, setFormprod] = useState("");
+  const [cultuprod, setCultuprod] = useState("");
+  const [appprod, setAppprod] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
+  // function MyImageUploader() {
 
-    if (file && file.type.startsWith('image/')) {
-      setSelectedImage(URL.createObjectURL(e.target.files[0]));
-      
-    } else {
-      alert('Por favor, selecione um arquivo de imagem válido.');
-    }
-  }
+  const handleImageChange = (e: any) => {
+    const file = e.target.files[0];
+    // if (file && file.type.startsWith("image/")) {
+    //   setSelectedImage(URL.createObjectURL(e.target.files[0]));
+    // } else {
+    //   alert("Por favor, selecione um arquivo de imagem válido.");
+    // }
+  };
+  // }
 
   return (
-    <main className="flex min-h-screen w-full flex-col items-center justify-between px-60 py-24">
+    <main className="flex w-full flex-col items-center justify-between px-60 py-24">
       <Card className="w-96">
         <CardHeader>
           <CardTitle>Cadastro de podutos</CardTitle>
           <CardDescription></CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="flex flex-col gap-4">
           <div className="flex flex-col">
-            <label htmlFor="nomeprod" className="text-sm pb-1">
+            <Label htmlFor="nomeprod" className="text-sm pb-1">
               Nome
-            </label>
-            <input
+            </Label>
+            <Input
               type="text"
               id="nomeprod"
-              className="border-2 rounded-md h-8 mb-5"
               placeholder="Ex: Bactérias"
               onChange={(e) => setNomeprod(e.target.value)}
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="precoprod" className="text-sm pb-1">
+            <Label htmlFor="precoprod" className="text-sm pb-1">
               Preço
-            </label>
-            <input
+            </Label>
+            <Input
               type="text"
               id="precoprod"
-              className="border-2 rounded-md h-8 mb-5"
               placeholder="Ex: R$ 10,00"
               onChange={(e) => setPrecoprod(e.target.value)}
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="tipoprod" className="text-sm pb-1">
+            <Label htmlFor="tipoprod" className="text-sm pb-1">
               Tipo
-            </label>
-            <input
+            </Label>
+            <Input
               type="text"
               id="tipoprod"
-              className="border-2 rounded-md h-8 mb-5"
               placeholder="Ex: Bactérias"
               onChange={(e) => setTipoprod(e.target.value)}
             />
           </div>
           <div>
-            <input type="file" accept="image/*" onChange={handleImageChange} />
-            {selectedImage && (
-              <img src={selectedImage} alt="Imagem selecionada" />
-            )}
+            <Input type="file" accept="image/*" />
+            {/* {selectedImage && (
+                <img src={selectedImage} alt="Imagem selecionada" />
+              )} */}
           </div>
           <div className="flex flex-col">
-            <label htmlFor="formprod" className="text-sm pb-1">
+            <Label htmlFor="formprod" className="text-sm pb-1">
               Formula
-            </label>
-            <input
+            </Label>
+            <Input
               type="text"
               id="formprod"
-              className="border-2 rounded-md h-8 mb-5"
               placeholder="Ex: Líquida"
               onChange={(e) => setFormprod(e.target.value)}
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="cultuprod" className="text-sm pb-1">
+            <Label htmlFor="cultuprod" className="text-sm pb-1">
               Cultura
-            </label>
-            <input
+            </Label>
+            <Input
               type="text"
               id="cultuprod"
-              className="border-2 rounded-md h-8 mb-5"
               placeholder="Ex: Bacillus subtilis"
               onChange={(e) => setCultuprod(e.target.value)}
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="appprod" className="text-sm pb-1">
+            <Label htmlFor="appprod" className="text-sm pb-1">
               Aplicação
-            </label>
-            <input
+            </Label>
+            <Input
               type="text"
               id="appprod"
-              className="border-2 rounded-md h-8 mb-5"
               placeholder="Ex: Foliar"
               onChange={(e) => setAppprod(e.target.value)}
             />
@@ -125,4 +121,4 @@ function MyImageUploader() {
       </Card>
     </main>
   );
-} 
+}
