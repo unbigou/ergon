@@ -2,6 +2,7 @@ export interface IUser {
     id: string;
     name: string;
     email: string;
+    userType: string;
     confirmEmail?: string;
     password: string;
     confirmPassword?: string;
@@ -18,6 +19,7 @@ export interface IUserCreateRequest {
     email: string;
     confirmEmail: string;
     password: string;
+    userType: string;
     confirmPassword: string;
     cpf: string;
     phoneNumber: string;
@@ -34,6 +36,7 @@ export interface IUserUpdateRequest{
     name: string;
     email: string;
     password: string;
+    userType: string;
     cpf: string;
     phoneNumber: string;
     gender: string;

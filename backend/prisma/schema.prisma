@@ -15,6 +15,7 @@ model user {
     name String @db.VarChar(255)
     email String @db.VarChar(255)
     password String @db.VarChar(255)
+    userType String @db.VarChar(255)
     cpf String @db.VarChar(255)
     phoneNumber String @db.VarChar(255)
     gender String @db.VarChar(255)
