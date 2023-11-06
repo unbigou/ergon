@@ -5,6 +5,7 @@ export class User{
     id: IUser['id'];
     name: IUser['name'];
     email: IUser['email'];
+    userType: IUser['userType'];
     confirmEmail?: IUser['confirmEmail'];
     password: IUser['password'];
     confirmPassword?: IUser['confirmPassword'];
@@ -19,6 +20,7 @@ export class User{
         this.id = id || createUUID();
         this.name = props.name;
         this.email = props.email;
+        this.userType = props.userType;
         this.confirmEmail = props.confirmEmail;
         this.password = props.password;
         this.confirmPassword = props.confirmPassword;
@@ -36,6 +38,7 @@ export class User{
                 name: this.name,
                 email: this.email,
                 password: this.password,
+                userType: this.userType,
                 confirmEmail: this.confirmEmail,
                 confirmPassword: this.confirmPassword,
                 cpf: this.cpf,
