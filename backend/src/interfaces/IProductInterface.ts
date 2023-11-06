@@ -3,10 +3,10 @@ export interface IProduct {
     name: string;
     price: string;
     type: string;
-    photo?: string;
-    formulation?: string;
-    cultures?: string;
-    aplication?: string;
+    photo: string;
+    formulation: string;
+    cultures: string;
+    aplication: string;
     createdAt?: Date;
     updatedAt?: Date;
 }
@@ -15,10 +15,10 @@ export interface IProductCreateRequest{
     name: string;
     price: string;
     type: string;
-    photo?: string;
-    formulation?: string;
-    cultures?: string;
-    aplication?: string;
+    photo: string;
+    formulation: string;
+    cultures: string;
+    aplication: string;
 }
 
 export interface IProductGetRequest{
@@ -30,10 +30,10 @@ export interface IProductUpdateRequest{
     name: string;
     price: string;
     type: string;
-    photo?: string;
-    formulation?: string;
-    cultures?: string;
-    aplication?: string;
+    photo: string;
+    formulation: string;
+    cultures: string;
+    aplication: string;
 }
 
 export interface IProductDeleteRequest{
