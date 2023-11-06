@@ -36,7 +36,7 @@ export class ProductRepository implements IProductRepository{
             where: { id }
         })
     }
-    async findByType(type: String): Promise<IProduct[]> {
+    async findByType(type: string): Promise<IProduct[]> {
         const result = await prisma.product.findMany({
             where: {type}
         })

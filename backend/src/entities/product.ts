@@ -6,10 +6,10 @@ export class Product{
     name: IProduct['name'];
     price: IProduct['price'];
     type: IProduct['type'];
-    photo?: IProduct['photo'];
-    formulation?: IProduct['formulation'];
-    cultures?: IProduct['cultures'];
-    aplication?: IProduct['aplication'];
+    photo: IProduct['photo'];
+    formulation: IProduct['formulation'];
+    cultures: IProduct['cultures'];
+    aplication: IProduct['aplication'];
     createdAt: IProduct['createdAt'];
     updatedAt: IProduct['updatedAt'];
 
