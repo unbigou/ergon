@@ -1,5 +1,15 @@
-export type Product = {
+export type ProductRes = {
   id: string;
+  name: string;
+  price: string;
+  type: string;
+  photo?: string;
+  formulation?: string;
+  cultures?: string;
+  aplication?: string;
+};
+
+export type ProductReq = {
   name: string;
   price: string;
   type: string;
@@ -90,4 +100,4 @@ export const tenProductList = [
     cultures: "Trichoderma harzianum",
     aplication: "Foliar",
   },
-] as Product[];
+] as ProductRes[];

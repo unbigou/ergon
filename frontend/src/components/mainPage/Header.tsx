@@ -7,6 +7,7 @@ import { Input } from "../ui/input";
 import useProducts from "@/context/useProducts";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Header() {
   const [search, setSearch] = useState("");
@@ -21,9 +22,9 @@ export default function Header() {
 
   return (
     <header className="flex justify-between items-center w-full fixed z-10 py-4 bg-darkGreen px-60">
-      <div className="flex items-center">
+      <Link className="flex items-center" href={'/'}>
         <Image src="/logo.svg" alt="logo" width={150} height={150} />
-      </div>
+      </Link>
       <div className="flex w-1/3 justify-center items-center gap-4">
         <Search size={24} className="text-white" />
         <form onSubmit={handleSubmit} className="w-full">

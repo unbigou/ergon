@@ -8,11 +8,11 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "../ui/button";
-import { Product } from "@/utils/types";
+import { ProductRes } from "@/utils/types";
 import Link from "next/link";
 
 type CardProps = {
-  product: Product;
+  product: ProductRes;
 };
 
 const CardsFunc = ({ product }: CardProps) => {

@@ -17,22 +17,6 @@ export default function MainSection() {
           loop: true,
         }}
       />
-      <Carrousel
-        slides={products.map((product) => (
-          <CardsFunc key={product.id} product={product} />
-        ))}
-        options={{
-          loop: true,
-        }}
-      />
-      <Carrousel
-        slides={products.map((product) => (
-          <CardsFunc key={product.id} product={product} />
-        ))}
-        options={{
-          loop: true,
-        }}
-      />
     </div>
   );
 }
