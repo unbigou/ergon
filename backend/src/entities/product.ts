@@ -10,6 +10,9 @@ export class Product{
     formulation: IProduct['formulation'];
     cultures: IProduct['cultures'];
     aplication: IProduct['aplication'];
+    rating: IProduct['rating'];
+    ratingCont: IProduct['ratingCont'];
+    ratingMax: IProduct['ratingMax'];
     createdAt: IProduct['createdAt'];
     updatedAt: IProduct['updatedAt'];
 
@@ -22,6 +25,9 @@ export class Product{
         this.formulation = props.formulation;
         this.cultures = props.cultures;
         this.aplication = props.aplication;
+        this.rating = props.rating;
+        this.ratingCont = props.ratingCont;
+        this.ratingMax = props.ratingMax;
         this.createdAt = props.createdAt || new Date();
         this.updatedAt = new Date();
     }
@@ -36,6 +42,9 @@ export class Product{
                 formulation: this.formulation,
                 cultures: this.cultures,
                 aplication: this.aplication,
+                rating: this.rating,
+                ratingCont: this.ratingCont,
+                ratingMax: this.ratingMax,
                 createdAt: this.createdAt,
                 updatedAt: this.updatedAt
             }

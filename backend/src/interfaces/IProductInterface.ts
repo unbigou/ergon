@@ -7,6 +7,9 @@ export interface IProduct {
     formulation: string;
     cultures: string[];
     aplication: string;
+    rating: number;
+    ratingCont: number;
+    ratingMax: number;
     createdAt?: Date;
     updatedAt?: Date;
 }
@@ -19,6 +22,9 @@ export interface IProductCreateRequest{
     formulation: string;
     cultures: string[];
     aplication: string;
+    rating: number;
+    ratingCont: number;
+    ratingMax: number;
 }
 
 export interface IProductGetRequest{
@@ -34,6 +40,9 @@ export interface IProductUpdateRequest{
     formulation: string;
     cultures: string[];
     aplication: string;
+    rating: number;
+    ratingCont: number;
+    ratingMax: number;
 }
 
 export interface IProductDeleteRequest{
