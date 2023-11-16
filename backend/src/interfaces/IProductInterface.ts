@@ -5,7 +5,7 @@ export interface IProduct {
     type: string;
     photo: string;
     formulation: string;
-    cultures: string;
+    cultures: string[];
     aplication: string;
     createdAt?: Date;
     updatedAt?: Date;
@@ -17,7 +17,7 @@ export interface IProductCreateRequest{
     type: string;
     photo: string;
     formulation: string;
-    cultures: string;
+    cultures: string[];
     aplication: string;
 }
 
@@ -32,7 +32,7 @@ export interface IProductUpdateRequest{
     type: string;
     photo: string;
     formulation: string;
-    cultures: string;
+    cultures: string[];
     aplication: string;
 }
 

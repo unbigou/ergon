@@ -31,7 +31,7 @@ model product {
     type String @db.VarChar(255)
     photo String @db.VarChar(255)
     formulation String @db.VarChar(255)
-    cultures String @db.VarChar(255)
+    cultures String[] @db.VarChar(255)
     aplication String @db.VarChar(255)
     createdAt DateTime @default(now())
     updatedAt DateTime @default(now())
