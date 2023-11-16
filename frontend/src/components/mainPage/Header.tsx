@@ -22,7 +22,7 @@ export default function Header() {
 
   return (
     <header className="flex justify-between items-center w-full fixed z-10 py-4 bg-darkGreen px-60">
-      <Link className="flex items-center" href={'/'}>
+      <Link className="flex items-center" href={'/dashboard'}>
         <Image src="/logo.svg" alt="logo" width={150} height={150} />
       </Link>
       <div className="flex w-1/3 justify-center items-center gap-4">
