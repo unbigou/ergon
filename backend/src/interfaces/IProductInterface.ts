@@ -3,7 +3,7 @@ export interface IProduct {
     name: string;
     price: string;
     type: string;
-    photo: string;
+    photo: string[];
     formulation: string;
     cultures: string[];
     aplication: string;
@@ -15,7 +15,7 @@ export interface IProductCreateRequest{
     name: string;
     price: string;
     type: string;
-    photo: string;
+    photo: string[];
     formulation: string;
     cultures: string[];
     aplication: string;
@@ -30,7 +30,7 @@ export interface IProductUpdateRequest{
     name: string;
     price: string;
     type: string;
-    photo: string;
+    photo: string[];
     formulation: string;
     cultures: string[];
     aplication: string;
