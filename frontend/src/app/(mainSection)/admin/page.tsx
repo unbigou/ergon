@@ -54,6 +54,7 @@ export default function AdminPage() {
               Nome
             </Label>
             <Input
+              required
               type="text"
               id="nomeprod"
               placeholder="Ex: Bactérias"
@@ -66,6 +67,7 @@ export default function AdminPage() {
               Preço
             </Label>
             <Input
+              required
               type="text"
               id="precoprod"
               placeholder="Ex: R$ 10,00"
@@ -78,6 +80,7 @@ export default function AdminPage() {
               Tipo
             </Label>
             <Input
+              required
               type="text"
               id="tipoprod"
               placeholder="Ex: Bactérias"
