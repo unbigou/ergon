@@ -1,14 +1,24 @@
 import { PrismaClient } from "@prisma/client";
 import { IPermissionRepository } from "../interfaces/IPermissionRepository";
 import { IPermission } from "../interfaces/IPermission";
+import { createUUID } from "../utils/createUUID";
 
 const prisma = new PrismaClient();
 
 export class PermissionRepository implements IPermissionRepository {
-    async insert(props: IPermission): Promise<void> {
+    async insert(props: Omit<IPermission, "id">): Promise<IPermission> {
+        let data = {
+            id: createUUID(),
+            ...props
+        }
+        
         await prisma.permission.create({
-            data: props
+            data: {
+                ...data
+            }   
         })
+
+        return data
     }
 
     async delete(id: string): Promise<void> {
