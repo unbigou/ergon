@@ -1,10 +1,10 @@
 "use client";
 
 import CardsFunc from "@/components/mainPage/Card";
-import useProducts from "@/context/useProducts";
+import useFilterProducts from "@/context/useFilterProducts";
 
 export default function FilteredProducts() {
-  const { filteredProducts } = useProducts();
+  const { filteredProducts } = useFilterProducts();
 
   return (
     <div className="items-center flex flex-col justify-center">
