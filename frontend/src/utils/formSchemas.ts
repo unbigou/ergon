@@ -1,5 +1,5 @@
+import { type } from "os";
 import { z } from "zod";
-import { File } from "buffer";
 
 export const productSchema = z.object({
   name: z
@@ -20,7 +20,8 @@ export const productSchema = z.object({
     })
     .positive({
       message: "O preço precisa ser positivo.",
-    }).refine((val) => val > 0, {
+    })
+    .refine((val) => val > 0, {
       message: "O preço precisa ser positivo.",
     }),
   type: z
@@ -34,10 +35,21 @@ export const productSchema = z.object({
     .max(255, {
       message: "O tipo precisa ter no máximo 255 caracteres.",
     }),
-  file: z.string({
-    invalid_type_error: "O arquivo precisa ser uma imagem.",
-    required_error: "O arquivo não pode ser vazio.",
-  }),
+  file: z.union([
+    z.string({
+      invalid_type_error: "A imagem não pode ser vazia.",
+      required_error: "A imagem não pode ser vazia.",
+    }),
+    z.array(
+      z.string({
+        invalid_type_error: "A imagem não pode ser vazia.",
+        required_error: "A imagem não pode ser vazia.",
+      })
+    ),
+    z.custom<File>(),
+    z.array(z.custom<File>())
+  ]),
+
   formulation: z.string({
     invalid_type_error: "A formulação não pode ser vazia.",
     required_error: "A formulação não pode ser vazia.",

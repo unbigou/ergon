@@ -3,7 +3,7 @@ export type ProductRes = {
   name: string;
   price: string;
   type: string;
-  photo?: string;
+  photo?: string[];
   formulation?: string;
   cultures?: string[];
   aplication?: string;
@@ -13,7 +13,7 @@ export type ProductReq = {
   name: string;
   price: string;
   type: string;
-  photo?: string;
+  photo?: string[];
   formulation?: string;
   cultures?: string[];
   aplication?: string;
