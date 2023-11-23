@@ -10,26 +10,17 @@ export class UserRepository implements IUserRepository {
     private cryptoRepo: ICryptoRepository,
   ) {}
 
-  async findAll(): Promise<IUser[]> {
-    let result = await prisma.user.findMany();
-    await Promise.all(
-      result.map(
-        async (user: IUser) =>
-          (user = { ...user, ...(await this.cryptoRepo.useDecryptoUser(user)) })
-      )
-      
-    );
-    return result;
-  }
+    async findAll(): Promise<IUser[]> {
+        let result = await prisma.user.findMany();
+        
+        return result;
+    }
 
-  async insert(props: IUser): Promise<IUser> {
-    props = await this.cryptoRepo.useEncryptoUser(props);
-    const user = await prisma.user.create({
-      data: props,
-    });
-
-    return user;
-  }
+    async insert(props: IUser): Promise<void> {
+        await prisma.user.create({
+            data: props,
+        });
+    }
 
   async findOneUser(id: string): Promise<IUser> {
     let result = await prisma.user.findUnique({

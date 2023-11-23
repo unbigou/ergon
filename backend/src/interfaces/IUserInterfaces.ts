@@ -2,7 +2,7 @@ export interface IUser {
     id: string;
     name: string;
     email: string;
-    userType: string;
+    permissionId: string;
     password: string;
     phoneNumber: string;
     createdAt?: Date;
@@ -14,7 +14,7 @@ export interface IUserCreateRequest {
     email: string;
     confirmEmail: string;
     password: string;
-    userType: string;
+    permissionId: string;
     confirmPassword: string;
     phoneNumber: string;
 }
@@ -28,7 +28,7 @@ export interface IUserUpdateRequest{
     name: string;
     email: string;
     password: string;
-    userType: string;
+    permissionId: string;
     phoneNumber: string;
 }
 

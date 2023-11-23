@@ -2,11 +2,11 @@ import { IUser } from "../interfaces/IUserInterfaces";
 import { createUUID } from "../utils/createUUID";
 
 export class User{
-    id: IUser['id'];
-    name: IUser['name'];
-    email: IUser['email'];
-    userType: IUser['userType'];
-    password: IUser['password'];
+    id:          IUser['id'];
+    name:        IUser['name'];
+    email:       IUser['email'];
+    permissions: IUser['permissionId'];
+    password:    IUser['password'];
     phoneNumber: IUser['phoneNumber'];
     createdAt?: IUser['createdAt'];
     updatedAt?: IUser['updatedAt'];
@@ -17,7 +17,10 @@ export class User{
         this.email = props.email;
         this.userType = props.userType;
         this.password = props.password;
+        this.cpf = props.cpf;
         this.phoneNumber = props.phoneNumber || '';
+        this.gender = props.gender;
+        this.birthDate = props.birthDate;
         this.createdAt = props.createdAt || new Date();
         this.updatedAt = new Date();
     }
@@ -28,7 +31,7 @@ export class User{
                 name: this.name,
                 email: this.email,
                 password: this.password,
-                userType: this.userType,
+                permissionId: this.permissions,
                 phoneNumber: this.phoneNumber,
                 createdAt: this.createdAt,
                 updatedAt: this.updatedAt
