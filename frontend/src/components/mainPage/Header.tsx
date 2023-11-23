@@ -4,13 +4,16 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import { Search, ShoppingCart, User } from "lucide-react";
 import { Input } from "../ui/input";
-import useProducts from "@/context/useProducts";
+import useFilterProducts from "@/context/useFilterProducts";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import useProducts from "@/context/useProducts";
 
 export default function Header() {
   const [search, setSearch] = useState("");
-  const { products, setFilteredProducts } = useProducts();
+  const { setFilteredProducts } = useFilterProducts();
+  const { products } = useProducts();
 
   const router = useRouter();
 
@@ -21,21 +24,23 @@ export default function Header() {
 
   return (
     <header className="flex justify-between items-center w-full fixed z-10 py-4 bg-darkGreen px-60">
-      <div className="flex items-center">
-        <Image src="/logo.svg" alt="logo" width={150} height={150} />
-      </div>
+      <Link className="flex items-center" href={"/dashboard"}>
+        <Image src="/logo.svg" alt="logo" width={150} height={150} priority />
+      </Link>
       <div className="flex w-1/3 justify-center items-center gap-4">
         <Search size={24} className="text-white" />
         <form onSubmit={handleSubmit} className="w-full">
           <Input
+            id="search"
             placeholder="Pesquisar"
+            autoComplete="on"
             value={search}
             onChange={(e) => {
               setSearch(e.target.value);
               setFilteredProducts(
                 e.target.value === ""
                   ? false
-                  : products.filter((product) =>
+                  : products!.filter((product) =>
                       product.name
                         .normalize("NFD")
                         .replace(/[\u0300-\u036f]/g, "")

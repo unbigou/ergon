@@ -16,7 +16,7 @@ export class Product{
     constructor(props: Omit<IProduct, 'id'>, id?: string){
         this.id = id || createUUID();
         this.name = props.name;
-        this.price = props.name;
+        this.price = props.price;
         this.type = props.type;
         this.photo = props.photo;
         this.formulation = props.formulation;
