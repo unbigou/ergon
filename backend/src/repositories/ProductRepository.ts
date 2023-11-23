@@ -1,5 +1,5 @@
 import { IProductRepository } from "../interfaces/IProductRepository";
-import { IProduct } from "../interfaces/IProductInterface";
+import { IProduct, IProductCreateRequest } from "../interfaces/IProductInterface";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -15,7 +15,7 @@ export class ProductRepository implements IProductRepository{
             where: { id }
         })
 
-        if(!result) throw new Error('Playlist not found')
+        if(!result) throw new Error('Product not found')
         return result
     }
 

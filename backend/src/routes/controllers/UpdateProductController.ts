@@ -7,10 +7,10 @@ export class UpdateProductController{
     constructor(private productRepo: IProductRepository){}
     async handle(req: Request, res: Response): Promise<Response>{
         const { id } = req.params;
-        const {name, price, type, photo, formulation, cultures, aplication}: IProduct = req.body;
+        const {name, price, type, photo, formulation, cultures, aplication, promotionPrice}: IProduct = req.body;
 
         const updateProductService = new UpdateProductService(this.productRepo)
-        await updateProductService.execute({id, name, price, type, photo, formulation, cultures, aplication})
+        await updateProductService.execute({id, name, price, type, photo, formulation, cultures, aplication, promotionPrice})
 
         return res.status(201).json()
     }

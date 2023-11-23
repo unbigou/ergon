@@ -5,6 +5,8 @@ export class Product{
     id: IProduct['id'];
     name: IProduct['name'];
     price: IProduct['price'];
+    promotionPrice: IProduct['promotionPrice'];
+    newPrice: IProduct['newPrice'];
     type: IProduct['type'];
     photo: IProduct['photo'];
     formulation: IProduct['formulation'];
@@ -19,7 +21,9 @@ export class Product{
     constructor(props: Omit<IProduct, 'id'>, id?: string){
         this.id = id || createUUID();
         this.name = props.name;
-        this.price = props.name;
+        this.price = props.price;
+        this.promotionPrice = "1";
+        this.newPrice = props.newPrice;
         this.type = props.type;
         this.photo = props.photo;
         this.formulation = props.formulation;
@@ -37,6 +41,8 @@ export class Product{
                 id: this.id,
                 name: this.name,
                 price: this.price,
+                promotionPrice: this.promotionPrice,
+                newPrice: this.newPrice,
                 type: this.type,
                 photo: this.photo,
                 formulation: this.formulation,

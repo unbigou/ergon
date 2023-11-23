@@ -2,29 +2,31 @@ export interface IProduct {
     id: string;
     name: string;
     price: string;
+    promotionPrice: string;
+    newPrice: string;
     type: string;
-    photo: string;
+    photo: string[];
     formulation: string;
     cultures: string[];
     aplication: string;
-    rating: number;
-    ratingCont: number;
-    ratingMax: number;
+    rating?: string;
+    ratingCont?: string;
+    ratingMax?: string;
     createdAt?: Date;
+    
     updatedAt?: Date;
 }
 
 export interface IProductCreateRequest{
     name: string;
     price: string;
+    promotionPrice: string;
+    newPrice: string;
     type: string;
-    photo: string;
+    photo: string[];
     formulation: string;
     cultures: string[];
     aplication: string;
-    rating: number;
-    ratingCont: number;
-    ratingMax: number;
 }
 
 export interface IProductGetRequest{
@@ -35,14 +37,12 @@ export interface IProductUpdateRequest{
     id: string;
     name: string;
     price: string;
+    promotionPrice: string;
     type: string;
-    photo: string;
+    photo: string[];
     formulation: string;
     cultures: string[];
     aplication: string;
-    rating: number;
-    ratingCont: number;
-    ratingMax: number;
 }
 
 export interface IProductDeleteRequest{
