@@ -15,7 +15,7 @@ export class ProductRepository implements IProductRepository{
             where: { id }
         })
 
-        if(!result) throw new Error('Playlist not found')
+        if(!result) throw new Error('Product not found')
         return result
     }
 
