@@ -20,12 +20,9 @@ export class CreateUserService {
   ) {}
   async execute({
     name,
-    gender,
     email,
     password,
     userType,
-    birthDate,
-    cpf,
     phoneNumber,
     confirmEmail,
     confirmPassword,
@@ -55,17 +52,12 @@ export class CreateUserService {
       throw new AppError('As senhas não são iguais.');
     }
 
-    if (!validateBirthDate(birthDate)) {
-      throw new AppError('Data de nascimento inválida');
-    }
-
-    if (!validateCpf(cpf)) {
-      throw new AppError('CPF inválido');
-    }
-
+  
+    if(phoneNumber !== ''){
     if (!validatePhoneNumber(phoneNumber)) {
       throw new AppError('Telefone inválido');
     }
+  }
 
     password = await this.hashRepo.cryptographie(password);
 
@@ -74,9 +66,6 @@ export class CreateUserService {
       email,
       password,
       userType,
-      birthDate: birthDate.toString(),
-      gender,
-      cpf,
       phoneNumber,
     });
   
