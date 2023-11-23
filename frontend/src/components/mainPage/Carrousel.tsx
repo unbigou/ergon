@@ -24,7 +24,7 @@ const Carrousel = (props: PropType) => {
   return (
     <div className="overflow-hidden relative" ref={emblaRef}>
       <div className="flex">
-        {slides.map((slide, index) => (
+        {slides?.map((slide, index) => (
           <div className="min-w-0 flex-[0_0_20%]" key={index}>
             {slide}
           </div>
