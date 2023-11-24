@@ -2,6 +2,7 @@
 
 import FilteredProducts from "@/components/mainPage/FilteredProducts";
 import MainSection from "@/components/mainPage/MainSection";
+import useFilterProducts from "@/context/useFilterProducts";
 import useProducts from "@/context/useProducts";
 import { useEffect } from "react";
 
@@ -10,30 +11,15 @@ export default function Home({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const { filteredProducts, setFilteredProducts, products, setProducts } =
-    useProducts();
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const res = await fetch("http://localhost:3333/product", {
-        method: "GET",
-        headers: {
-          "x-api-key": "YOUR_API_KEY",
-        },
-      });
-      const data = await res.json();
-      setProducts(data);
-      console.log(data);
-    };
-    fetchProducts();
-  }, []);
+  const { filteredProducts, setFilteredProducts } = useFilterProducts();
+  const { products } = useProducts();
 
   useEffect(() => {
     searchParams.search
       ? setFilteredProducts(
           searchParams.search === ""
             ? false
-            : products.filter((product) =>
+            : products!.filter((product) =>
                 product.name
                   .normalize("NFD")
                   .replace(/[\u0300-\u036f]/g, "")

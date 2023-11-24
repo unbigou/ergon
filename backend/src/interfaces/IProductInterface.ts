@@ -3,9 +3,9 @@ export interface IProduct {
     name: string;
     price: string;
     type: string;
-    photo: string;
+    photo: string[];
     formulation: string;
-    cultures: string;
+    cultures: string[];
     aplication: string;
     createdAt?: Date;
     updatedAt?: Date;
@@ -15,9 +15,9 @@ export interface IProductCreateRequest{
     name: string;
     price: string;
     type: string;
-    photo: string;
+    photo: string[];
     formulation: string;
-    cultures: string;
+    cultures: string[];
     aplication: string;
 }
 
@@ -30,9 +30,9 @@ export interface IProductUpdateRequest{
     name: string;
     price: string;
     type: string;
-    photo: string;
+    photo: string[];
     formulation: string;
-    cultures: string;
+    cultures: string[];
     aplication: string;
 }
 
