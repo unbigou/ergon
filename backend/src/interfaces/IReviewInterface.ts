@@ -28,5 +28,5 @@ export interface IReviewDeleteRequest{
 export interface IReviewUpdateRequest{
     id: string;
     comentary: string;
-    userId: string;
+    rating: string;
 }
