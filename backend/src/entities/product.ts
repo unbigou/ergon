@@ -1,5 +1,6 @@
 import { IProduct } from "../interfaces/IProductInterface";
 import { createUUID } from "../utils/createUUID";
+import { promotionCalc } from "../utils/promotion";
 
 export class Product{
     id: IProduct['id'];
@@ -23,7 +24,7 @@ export class Product{
         this.name = props.name;
         this.price = props.price;
         this.promotionPrice = "1";
-        this.newPrice = props.newPrice;
+        this.newPrice = promotionCalc(this.price, this.promotionPrice);
         this.type = props.type;
         this.photo = props.photo;
         this.formulation = props.formulation;
