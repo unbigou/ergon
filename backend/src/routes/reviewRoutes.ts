@@ -6,15 +6,17 @@ import { GetReviewByUserController } from "./controllers/review/GetReviewByUserC
 import { GetReviewController } from "./controllers/review/GetReviewService";
 import { UpdateReviewController } from "./controllers/review/updateReviewController";
 import { resolveController } from "../adapters/resolverController";
+import { ProductRepository } from "../repositories/ProductRepository";
 
 export const reviewRoute = Router()
 
 const reviewRepo = new ReviewRepository();
-const createReviewController = new CreateReviewController(reviewRepo)
+const productRepo = new ProductRepository();
+const createReviewController = new CreateReviewController(reviewRepo, productRepo)
 const deleteReviewController = new DeleteReviewController(reviewRepo)
 const getReviewByUserController = new GetReviewByUserController(reviewRepo)
 const getReviewController = new GetReviewController(reviewRepo)
-const updateReviewController = new UpdateReviewController(reviewRepo)
+const updateReviewController = new UpdateReviewController(reviewRepo, productRepo)
 
 reviewRoute.post('/', resolveController(async(req: Request, res: Response) => {
     return await createReviewController.handle(req,res)

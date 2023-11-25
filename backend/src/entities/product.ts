@@ -17,6 +17,7 @@ export class Product{
     ratingMax: IProduct['ratingMax'];
     createdAt: IProduct['createdAt'];
     updatedAt: IProduct['updatedAt'];
+    
 
     constructor(props: Omit<IProduct, 'id'>, id?: string){
         this.id = id || createUUID();
@@ -29,9 +30,9 @@ export class Product{
         this.formulation = props.formulation;
         this.cultures = props.cultures;
         this.aplication = props.aplication;
-        this.rating = props.rating;
-        this.ratingCont = props.ratingCont;
-        this.ratingMax = props.ratingMax;
+        this.rating = "0";
+        this.ratingCont = "0";
+        this.ratingMax = "0";
         this.createdAt = props.createdAt || new Date();
         this.updatedAt = new Date();
     }

@@ -3,6 +3,7 @@ export interface IReview{
     rating: string;
     comentary: string;
     userId: string;
+    productId: string;
     createdAt?: Date;
     updatedAt?: Date;
 }
@@ -11,6 +12,7 @@ export interface IReviewCreateRequest{
     rating: string;
     comentary: string;
     userId: string;
+    productId: string;
 }
 
 export interface IReviewGetRequest{
@@ -29,4 +31,5 @@ export interface IReviewUpdateRequest{
     id: string;
     comentary: string;
     rating: string;
+    productId: string;
 }

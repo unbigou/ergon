@@ -6,6 +6,7 @@ export class Review{
     rating: IReview['rating'];
     comentary: IReview['comentary'];
     userId: IReview['userId'];
+    productId: IReview['productId']
     createdAt: IReview['createdAt'];
     updatedAt: IReview['updatedAt'];
 
@@ -14,6 +15,7 @@ export class Review{
         this.rating = props.rating;
         this.comentary = props.comentary;
         this.userId = props.userId;
+        this.productId = props.productId;
         this.createdAt = props.createdAt || new Date();
         this.updatedAt = new Date();
     }
@@ -25,7 +27,8 @@ export class Review{
             rating: this.rating,
             userId: this.userId,
             createdAt: this.createdAt,
-            updatedAt: this.updatedAt
+            updatedAt: this.updatedAt,
+            productId: this.productId
         }
     }
 }

@@ -38,6 +38,7 @@ model product {
     aplication String @db.VarChar(255)
     createdAt DateTime @default(now())
     updatedAt DateTime @default(now())
+    reviews review[]
 }
 
 model review{
@@ -48,4 +49,6 @@ model review{
   updatedAt DateTime @default(now())
   user user @relation(fields: [userId], references: [id])
   userId String @db.Uuid
+  product product @relation(fields: [productId], references: [id])
+  productId String @db.Uuid
 }

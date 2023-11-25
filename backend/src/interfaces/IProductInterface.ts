@@ -13,7 +13,6 @@ export interface IProduct {
     ratingCont?: string;
     ratingMax?: string;
     createdAt?: Date;
-    
     updatedAt?: Date;
 }
 
