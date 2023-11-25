@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { IReviewRepository } from "../../../interfaces/IReviewRepository";
 import { DeleteReviewService } from "../../../services/review/DeleteReviewService";
 
-export class CreateReviewController{
+export class DeleteReviewController{
     constructor(private reviewRepo: IReviewRepository){}
     async handle(req: Request, res: Response):Promise<Response>{
         const { id } = req.params;

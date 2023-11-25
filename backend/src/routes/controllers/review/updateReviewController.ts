@@ -3,7 +3,7 @@ import { IReviewRepository } from "../../../interfaces/IReviewRepository";
 import { IReview } from "../../../interfaces/IReviewInterface";
 import { UpdatedReviewService } from "../../../services/review/UpdateReviewService";
 
-export class CreateReviewController{
+export class UpdateReviewController{
     constructor(private reviewRepo: IReviewRepository){}
     async handle(req: Request, res: Response):Promise<Response>{
         const { id } = req.params;

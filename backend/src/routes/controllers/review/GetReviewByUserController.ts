@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { IReviewRepository } from "../../../interfaces/IReviewRepository";
 import { GetReviewByUserService } from "../../../services/review/GetReviewByUserService";
 
-export class CreateReviewController{
+export class GetReviewByUserController{
     constructor(private reviewRepo: IReviewRepository){}
     async handle(req: Request, res: Response):Promise<Response>{
        const { userId } = req.params;
