@@ -29,5 +29,9 @@ export default {
     methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
     origin: '*',
     preflightContinue: false,
+  },
+  notification: {
+    email: process.env.EMAIL || 'example@email.domain',
+    password: process.env.EMAIL_APP_PASSWORD || 'emailpassword'
   }
 }

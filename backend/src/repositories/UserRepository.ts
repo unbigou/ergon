@@ -65,4 +65,14 @@ export class UserRepository implements IUserRepository {
     // if (!result !== null || result !== null) throw new Error('User not found');
     return result || null;
   }
+
+  async findByProduct(productId: string): Promise<IUser[]> {
+      return await prisma.user.findMany({
+        where: {
+            toNotificate: {
+                has: productId
+            }
+        }
+      })
+  }
 }

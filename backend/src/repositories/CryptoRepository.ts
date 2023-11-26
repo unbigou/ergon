@@ -31,20 +31,12 @@ export class CryptoRepository implements ICryptoRepository {
   }
 
   async useDecryptoUser(props: IUser): Promise<IUser> {
-    for (const prop of getUserKeys()) {
-      if(prop === 'id' || prop === 'createdAt' || prop === 'updatedAt') continue;
-      if(prop === 'birthDate') props[prop] = new Date(await this.decrypt(props[prop])).toString()
-      else props[prop] = await this.decrypt(props[prop] as string);
-    }
+    
     return props;
   }
 
   async useEncryptoUser(props: IUser): Promise<IUser> {
-    for (const prop of getUserKeys()) {
-      if(prop === 'id' || prop === 'createdAt' || prop === 'updatedAt') continue;
-      props[prop] = await this.encrypt(props[prop] as string);
-    }
-
+    
     return props;
   }
 }

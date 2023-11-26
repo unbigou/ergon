@@ -1,12 +1,19 @@
 import { Product } from "../entities/product";
-import { AppError } from "../errors/AppError";
 import { IProductRepository } from "../interfaces/IProductRepository";
-import { IProduct, IProductUpdateRequest } from "../interfaces/IProductInterface";
+import { IProductUpdateRequest } from "../interfaces/IProductInterface";
+import { NotificationService } from "./NotificationService";
+import { IUserRepository } from "../interfaces/IUserRepository";
 
 export class UpdateProductService{
-    constructor(private productRepo: IProductRepository){}
+    constructor(private productRepo: IProductRepository, private userRepo: IUserRepository) {}
+
     async execute({id, name, price, type, photo, formulation, cultures, aplication}: IProductUpdateRequest): Promise<void>{
         const result = await this.productRepo.findOneProduct(id)
+
+        if(price && price < result.price) {
+            let notificate = new NotificationService(this.userRepo, this.productRepo);
+            await notificate.execute(id)
+        }
 
         const product = new Product({
             name: name || result.name,

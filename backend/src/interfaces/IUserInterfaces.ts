@@ -8,6 +8,7 @@ export interface IUser {
     phoneNumber: string;
     gender: string;
     birthDate: string;
+    toNotificate?: string[];
     createdAt?: Date;
     updatedAt?: Date;
 }

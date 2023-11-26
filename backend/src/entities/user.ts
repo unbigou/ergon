@@ -11,6 +11,7 @@ export class User{
     phoneNumber: IUser['phoneNumber'];
     gender: IUser['gender'];
     birthDate: IUser['birthDate'];
+    toNotificate?: IUser['toNotificate']
     createdAt?: IUser['createdAt'];
     updatedAt?: IUser['updatedAt'];
 
@@ -24,6 +25,7 @@ export class User{
         this.phoneNumber = props.phoneNumber;
         this.gender = props.gender;
         this.birthDate = props.birthDate;
+        this.toNotificate = props.toNotificate;
         this.createdAt = props.createdAt || new Date();
         this.updatedAt = new Date();
     }
@@ -39,6 +41,7 @@ export class User{
                 phoneNumber: this.phoneNumber,
                 gender: this.gender,
                 birthDate: this.birthDate,
+                toNotificate: this.toNotificate,
                 createdAt: this.createdAt,
                 updatedAt: this.updatedAt
             }
