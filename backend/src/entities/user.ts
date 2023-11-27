@@ -7,10 +7,7 @@ export class User{
     email: IUser['email'];
     userType: IUser['userType'];
     password: IUser['password'];
-    cpf: IUser['cpf'];
     phoneNumber: IUser['phoneNumber'];
-    gender: IUser['gender'];
-    birthDate: IUser['birthDate'];
     createdAt?: IUser['createdAt'];
     updatedAt?: IUser['updatedAt'];
 
@@ -20,10 +17,7 @@ export class User{
         this.email = props.email;
         this.userType = props.userType;
         this.password = props.password;
-        this.cpf = props.cpf;
-        this.phoneNumber = props.phoneNumber;
-        this.gender = props.gender;
-        this.birthDate = props.birthDate;
+        this.phoneNumber = props.phoneNumber || '';
         this.createdAt = props.createdAt || new Date();
         this.updatedAt = new Date();
     }
@@ -35,10 +29,7 @@ export class User{
                 email: this.email,
                 password: this.password,
                 userType: this.userType,
-                cpf: this.cpf,
                 phoneNumber: this.phoneNumber,
-                gender: this.gender,
-                birthDate: this.birthDate,
                 createdAt: this.createdAt,
                 updatedAt: this.updatedAt
             }

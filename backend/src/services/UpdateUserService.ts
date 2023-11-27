@@ -6,7 +6,7 @@ import { AppError } from "../errors/AppError"
 
 export class UpdateUserService{
     constructor(private userRepo: IUserRepository) {}
-    async execute({id, name, email, userType, password, phoneNumber, gender }: IUserUpdateRequest): Promise<void> {
+    async execute({id, name, email, userType, password, phoneNumber }: IUserUpdateRequest): Promise<void> {
         const result = await this.userRepo.findOneUser(id)
 
 
@@ -28,10 +28,7 @@ export class UpdateUserService{
             email: email || result.email,
             password: password || result.password,
             userType: userType || result.userType,
-            cpf: result.cpf,
-            gender: gender || result.gender,
-            phoneNumber: phoneNumber || result.phoneNumber,
-            birthDate: result.birthDate
+            phoneNumber: phoneNumber || result.phoneNumber
         }, result.id)
     
         await this.userRepo.update(user.toJson(), id)

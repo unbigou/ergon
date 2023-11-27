@@ -9,7 +9,7 @@ export class UpdateUserController{
     constructor(private userRepo: IUserRepository){}
     async handle(req: Request, res: Response): Promise<Response>{
         const { id } =req.params;
-    const {name, email, password, userType, birthDate, gender, cpf, phoneNumber }: IUser = req.body;
+    const {name, email, password, userType, phoneNumber }: IUser = req.body;
 
     const updateUserService = new UpdateUserService(this.userRepo)
     await updateUserService.execute({
@@ -18,10 +18,7 @@ export class UpdateUserController{
         email, 
         password,
         userType, 
-        phoneNumber, 
-        gender, 
-        cpf, 
-        birthDate: new Date(birthDate)
+        phoneNumber,
     })
 
     return res.status(201).json()

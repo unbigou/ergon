@@ -4,10 +4,7 @@ export interface IUser {
     email: string;
     userType: string;
     password: string;
-    cpf: string;
     phoneNumber: string;
-    gender: string;
-    birthDate: string;
     createdAt?: Date;
     updatedAt?: Date;
 }
@@ -19,10 +16,7 @@ export interface IUserCreateRequest {
     password: string;
     userType: string;
     confirmPassword: string;
-    cpf: string;
     phoneNumber: string;
-    gender: string;
-    birthDate: Date;
 }
 
 export interface IUserGetRequest{
@@ -35,10 +29,7 @@ export interface IUserUpdateRequest{
     email: string;
     password: string;
     userType: string;
-    cpf: string;
     phoneNumber: string;
-    gender: string;
-    birthDate: Date;
 }
 
 export interface IUserDeleteRequest{

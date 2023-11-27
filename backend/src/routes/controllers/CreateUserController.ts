@@ -16,9 +16,6 @@ export class CreateUserController {
       userType,
       confirmEmail,
       confirmPassword,
-      birthDate,
-      gender,
-      cpf,
       phoneNumber,
     } = req.body;
 
@@ -34,9 +31,6 @@ export class CreateUserController {
       userType,
       confirmEmail,
       confirmPassword,
-      birthDate,
-      gender,
-      cpf,
       phoneNumber,
     });
 

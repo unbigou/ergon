@@ -24,7 +24,7 @@ export class AuthenticateUserService {
 
                 return { user, token }
 
-            } else throw new AppError("Senha Incorreta");
+            } else throw new AppError("Email ou Senha Incorretos");
 
         } else throw new AppError("Usuário Inexistente");
     }
