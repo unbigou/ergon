@@ -37,7 +37,7 @@ export default function Home({
   }, [products, searchParams.search, setFilteredProducts]);
 
   return (
-    <main className="flex min-h-screen w-full flex-col items-center justify-between px-60 py-24">
+    <main className="flex min-h-screen w-full flex-col h-full items-center justify-between px-60 py-24">
       {!filteredProducts === false ? <FilteredProducts /> : <MainSection />}
     </main>
   );

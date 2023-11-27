@@ -61,13 +61,13 @@ export default function ProductForm() {
     setLoading(true);
     const link = await imgUpload(values.file as File[]);
     const req = {
-      name: values.name || "teste",
-      price: values.price.toString() || "teste",
-      type: values.type || "teste",
-      photo: link || ["teste"],
-      formulation: values.formulation || "teste",
-      cultures: values.cultures || ["teste"],
-      aplication: values.application || "teste",
+      name: values.name || "",
+      price: values.price.toString() || "",
+      type: values.type || "",
+      photo: link || [""],
+      formulation: values.formulation || "",
+      cultures: values.cultures || [""],
+      aplication: values.application || "",
     };
 
     product
