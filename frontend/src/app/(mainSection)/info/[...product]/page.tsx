@@ -5,17 +5,6 @@ import { ProductRes } from "@/utils/types";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-// const product = {
-//   id: "95",
-//   name: "Bactérias",
-//   price: "R$ 10,00",
-//   type: "Bactérias",
-//   photo: "/mambore.png",
-//   formulation: "Líquida",
-//   cultures: "Bacillus subtilis",
-//   aplication: "Foliar",
-// };
-
 export default function InfoPage({
   params,
 }: {
