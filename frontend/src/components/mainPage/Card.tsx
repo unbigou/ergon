@@ -18,7 +18,7 @@ type CardProps = {
 const CardsFunc = ({ product }: CardProps) => {
   return (
     <div className="w-fit">
-      <Card>
+      <Card className="h-full">
         <CardHeader>
           <CardTitle>{product.name}</CardTitle>
           <CardDescription>{product.type}</CardDescription>

@@ -9,6 +9,42 @@ export type ProductRes = {
   aplication?: string;
 };
 
+export type user = {
+  name: string;
+  email: string;
+  confirmEmail?: string;
+  password: string;
+  confirmPassword?: string;
+  phoneNumber?: string;
+  permissionId: string;
+};
+
+export type userRes = {
+  id: string;
+  name: string;
+  email: string;
+  phoneNumber: string;
+  permissionId: string;
+};
+
+export type login = {
+  email: string;
+  password: string;
+};
+
+export type authRes = {
+  data: {
+    token: string;
+    user: {
+      id: string;
+      name: string;
+      email: string;
+      phoneNumber: string;
+      permissionId: string;
+    };
+  };
+};
+
 export type ProductReq = {
   name: string;
   price: string;

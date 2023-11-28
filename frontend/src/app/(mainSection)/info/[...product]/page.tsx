@@ -38,12 +38,19 @@ export default function InfoPage({
   }, []);
 
   return (
-    <main className="flex min-h-screen w-full flex-col items-center justify-between px-60 py-24">
+    <main className="flex min-h-screen w-full flex-col items-center justify-between px-60 py-24 bg-gray-100">
       <div className="flex flex-row mt-20">
-        <Image src={`/mambore.png`} alt="logo" width={300} height={300} />
-        <div className="flex flex-col ml-24">
-          <h1 className="semi-bold text-2xl">{product?.name}</h1>
-          <div className="mt-20 flex flex-row items-center gap-2">
+        <div className="flex bg-white p-20">
+          <Image
+            src={product?.photo ? product?.photo[0] : "/notFound.png"}
+            alt="logo"
+            width={300}
+            height={300}
+          />
+        </div>
+        <div className="flex flex-col ml-36">
+          <h1 className="font-bold text-gray-600 text-3xl">{product?.name}</h1>
+          <div className="mt-4 flex flex-row items-center gap-2">
             <p className="text-lg">
               {Intl.NumberFormat("pt-BR", {
                 style: "currency",
@@ -52,9 +59,16 @@ export default function InfoPage({
             </p>
             <p className="text-sm"> à vista</p>
           </div>
-          <p className="text-sm">{product?.formulation}</p>
-          <p className="text-sm">{product?.cultures}</p>
-          <p className="text-sm">{product?.aplication}</p>
+          <p className="text-darkGreen font-semibold mt-10">Fomulação</p>
+          <li className="text-sm ml-2">{product?.formulation}</li> 
+          <p className="text-darkGreen font-semibold mt-4">Culturas</p>
+             {
+               product?.cultures?.map((culture, index) => (
+                <li className="text-sm ml-2" key={index}>{culture}</li>
+              ))
+             }
+          <p className="text-darkGreen font-semibold mt-4">Aplicação</p>
+           <li className="text-sm ml-2">{product?.aplication}</li>
           <Button className="bg-darkGreen hover:bg-green-900 mt-14">
             Falar com o vendedor
           </Button>

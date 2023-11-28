@@ -1,17 +1,13 @@
-import { NextFunction, Request, Response, Router } from "express";
-import { IProduct } from "../interfaces/IProductInterface";
-import { createUUID } from "../utils/createUUID";
-import { Product } from "../entities/product";
-import { CreateProductController } from "./controllers/CreateProductController";
-import { GetProductController } from "./controllers/GetProductController";
-import { ListProductController } from "./controllers/ListProductController";
-import { UpdateProductController } from "./controllers/UpdateProductController";
-import { DeleteProductController } from "./controllers/DeleteProductController";
-import { GetByTypeProductController } from "./controllers/GetByTypeProductController";
+import { Request, Response, Router } from "express";
+import { CreateProductController } from "./controllers/product/CreateProductController";
+import { GetProductController } from "./controllers/product/GetProductController";
+import { ListProductController } from "./controllers/product/ListProductController";
+import { UpdateProductController } from "./controllers/product/UpdateProductController";
+import { DeleteProductController } from "./controllers/product/DeleteProductController";
+import { GetByTypeProductController } from "./controllers/product/GetByTypeProductController";
 import { resolveController } from "../adapters/resolverController";
 import { ProductRepository } from "../repositories/ProductRepository";
 
-const products: IProduct[] = [];
 export const productRoute = Router();
 
 const productRepo = new ProductRepository()

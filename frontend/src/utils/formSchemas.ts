@@ -1,5 +1,68 @@
-import { type } from "os";
 import { z } from "zod";
+
+export const loginSchema = z.object({
+  email: z
+    .string({
+      invalid_type_error: "O email precisa ser um texto.",
+      required_error: "O email não pode ser vazio.",
+    })
+    .email({
+      message: "O email precisa ser válido.",
+    }),
+  password: z
+    .string({
+      invalid_type_error: "A senha precisa ser um texto.",
+      required_error: "A senha não pode ser vazia.",
+    })
+    .min(3, {
+      message: "A senha precisa ter no mínimo 3 caracteres.",
+    })
+    .max(255, {
+      message: "A senha precisa ter no máximo 255 caracteres.",
+    }),
+});
+
+export const registerSchema = z.object({
+  email: z
+    .string({
+      invalid_type_error: "O email precisa ser um texto.",
+      required_error: "O email não pode ser vazio.",
+    })
+    .email({
+      message: "O email precisa ser válido.",
+    }),
+  confirmEmail: z
+    .string({
+      invalid_type_error: "A confirmação de email precisa ser um texto.",
+      required_error: "A confirmação de email não pode ser vazia.",
+    })
+    .email({
+      message: "A confirmação de email precisa ser válida.",
+    }),
+
+  password: z
+    .string({
+      invalid_type_error: "A senha precisa ser um texto.",
+      required_error: "A senha não pode ser vazia.",
+    })
+    .min(3, {
+      message: "A senha precisa ter no mínimo 3 caracteres.",
+    })
+    .max(255, {
+      message: "A senha precisa ter no máximo 255 caracteres.",
+    }),
+  confirmPassword: z
+    .string({
+      invalid_type_error: "A confirmação de senha precisa ser um texto.",
+      required_error: "A confirmação de senha não pode ser vazia.",
+    })
+    .min(3, {
+      message: "A confirmação de senha precisa ter no mínimo 3 caracteres.",
+    })
+    .max(255, {
+      message: "A confirmação de senha precisa ter no máximo 255 caracteres.",
+    }),
+});
 
 export const productSchema = z.object({
   name: z
@@ -47,7 +110,7 @@ export const productSchema = z.object({
       })
     ),
     z.custom<File>(),
-    z.array(z.custom<File>())
+    z.array(z.custom<File>()),
   ]),
 
   formulation: z.string({
