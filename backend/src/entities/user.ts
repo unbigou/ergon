@@ -15,12 +15,9 @@ export class User{
         this.id = id || createUUID();
         this.name = props.name;
         this.email = props.email;
-        this.userType = props.userType;
+        this.permissions = props.permissionId;
         this.password = props.password;
-        this.cpf = props.cpf;
         this.phoneNumber = props.phoneNumber || '';
-        this.gender = props.gender;
-        this.birthDate = props.birthDate;
         this.createdAt = props.createdAt || new Date();
         this.updatedAt = new Date();
     }

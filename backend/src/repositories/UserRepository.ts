@@ -28,7 +28,6 @@ export class UserRepository implements IUserRepository {
     });
 
     if (!result) throw new Error('User not found');
-    result = { ...result, ...await this.cryptoRepo.useDecryptoUser(result) };
     return result;
   }
 
@@ -46,14 +45,10 @@ export class UserRepository implements IUserRepository {
     });
   }
 
-  async findByEmail(email: IUser['email']): Promise<IUser | null> {
-    email = await this.cryptoRepo.encrypt(email);
+  async findByEmail(email: string): Promise<IUser | null> {
     let result = await prisma.user.findFirst({
       where: { email },
     });
-    if(result) result = { ...result, ...await this.cryptoRepo.useDecryptoUser(result) };
-    // Verificar uma maneira melho de implementar porque o primeiro caso sempre é null
-    // if (!result !== null || result !== null) throw new Error('User not found');
-    return result || null;
+    return result;
   }
 }
