@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model permission {
+  id          String     @id @db.Uuid
+  name        String     @db.VarChar(255)
+  description String[]     @db.VarChar(255)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @default(now())
+  users       user[]
+}
+
+model user {
+  id           String     @id @db.Uuid
+  name         String     @db.VarChar(255)
+  email        String     @db.VarChar(255)
+  password     String     @db.VarChar(255)
+  phoneNumber  String     @db.VarChar(255)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @default(now())
+  permissions  permission @relation(fields: [permissionId], references: [id])
+  permissionId String     @db.Uuid
+}
+
+model product {
+    id String @id @db.Uuid 
+    name String @db.VarChar(255)
+    price String @db.VarChar(255)
+    type String @db.VarChar(255)
+    photo String[] @db.VarChar(255)
+    formulation String @db.VarChar(255)
+    cultures String[] @db.VarChar(255)
+    aplication String @db.VarChar(255)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+}
