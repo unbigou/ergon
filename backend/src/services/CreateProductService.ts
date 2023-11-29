@@ -5,8 +5,8 @@ import { IProductCreateRequest } from "../interfaces/IProductInterface";
 
 export class CreateProductService{
     constructor(private productRepo: IProductRepository){}
-    async execute({name, price, type, photo, formulation, cultures, aplication, promotionPrice, newPrice}: IProductCreateRequest): Promise<void>{
-        const product = new Product({name, price, type, photo, formulation, cultures, aplication, promotionPrice, newPrice})
+    async execute({name, price, type, photo, formulation, cultures, aplication, promotionPrice, newPrice, stock}: IProductCreateRequest): Promise<void>{
+        const product = new Product({name, price, type, photo, formulation, cultures, aplication, promotionPrice, newPrice, stock})
         await this.productRepo.insert(product.toJson())
     }
 }

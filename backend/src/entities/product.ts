@@ -15,6 +15,8 @@ export class Product{
     rating: IProduct['rating'];
     ratingCont: IProduct['ratingCont'];
     ratingMax: IProduct['ratingMax'];
+    reviewsId: IProduct['reviewsId'];
+    stock: IProduct['stock']
     createdAt: IProduct['createdAt'];
     updatedAt: IProduct['updatedAt'];
     
@@ -33,6 +35,8 @@ export class Product{
         this.rating = "0";
         this.ratingCont = "0";
         this.ratingMax = "0";
+        this.reviewsId = props.reviewsId;
+        this.stock = props.stock;
         this.createdAt = props.createdAt || new Date();
         this.updatedAt = new Date();
     }
@@ -53,7 +57,9 @@ export class Product{
                 ratingCont: this.ratingCont,
                 ratingMax: this.ratingMax,
                 createdAt: this.createdAt,
-                updatedAt: this.updatedAt
+                updatedAt: this.updatedAt,
+                reviewsId: this.reviewsId,
+                stock: this.stock
             }
         }
 }

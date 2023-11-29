@@ -38,7 +38,8 @@ model product {
     aplication String @db.VarChar(255)
     createdAt DateTime @default(now())
     updatedAt DateTime @default(now())
-    reviews review[]
+    reviews review[] 
+    stock Boolean @db.Boolean
 }
 
 model review{

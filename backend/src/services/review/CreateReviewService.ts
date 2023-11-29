@@ -27,7 +27,8 @@ export class CreateReviewService{
             newPrice: prod.newPrice,
             ratingCont: ratingContCalc(prod.ratingCont || "0"),
             ratingMax: ratingMaxCalc(prod.ratingMax || "0", rating),
-            rating: ratingCalc(prod.ratingCont || "0", prod.ratingMax || "0")
+            rating: ratingCalc(prod.ratingCont || "0", prod.ratingMax || "0"),
+            stock: prod.stock
         }, result.id)
 
         await this.productRepo.update(product.toJson(), productId)

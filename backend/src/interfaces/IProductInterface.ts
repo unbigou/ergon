@@ -9,6 +9,8 @@ export interface IProduct {
     formulation: string;
     cultures: string[];
     aplication: string;
+    reviewsId?: string[];
+    stock: boolean;
     rating?: string;
     ratingCont?: string;
     ratingMax?: string;
@@ -26,6 +28,7 @@ export interface IProductCreateRequest{
     formulation: string;
     cultures: string[];
     aplication: string;
+    stock: boolean;
 }
 
 export interface IProductGetRequest{
@@ -42,6 +45,7 @@ export interface IProductUpdateRequest{
     formulation: string;
     cultures: string[];
     aplication: string;
+    stock: boolean;
 }
 
 export interface IProductDeleteRequest{
