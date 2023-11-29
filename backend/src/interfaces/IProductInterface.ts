@@ -9,11 +9,10 @@ export interface IProduct {
     formulation: string;
     cultures: string[];
     aplication: string;
-    reviewsId?: string[];
     stock: boolean;
-    rating?: string;
-    ratingCont?: string;
-    ratingMax?: string;
+    rating: string;
+    ratingCont: string;
+    ratingMax: string;
     createdAt?: Date;
     updatedAt?: Date;
 }

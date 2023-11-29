@@ -40,6 +40,9 @@ model product {
     updatedAt DateTime @default(now())
     reviews review[] 
     stock Boolean @db.Boolean
+    rating String @db.VarChar(255)
+    ratingCont String @db.VarChar(255)
+    ratingMax String @db.VarChar(255)
 }
 
 model review{

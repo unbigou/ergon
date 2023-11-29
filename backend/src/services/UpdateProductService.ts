@@ -18,7 +18,10 @@ export class UpdateProductService{
             aplication: aplication || result.aplication,
             promotionPrice: promotionPrice,
             newPrice: result.newPrice,
-            stock: stock || result.stock
+            stock: stock || result.stock,
+            rating: result.rating,
+            ratingCont: result.ratingCont,
+            ratingMax: result.ratingMax
         }, result.id)
 
         await this.productRepo.update(product.toJson(), id)
