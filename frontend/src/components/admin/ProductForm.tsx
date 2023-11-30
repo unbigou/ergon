@@ -17,15 +17,53 @@ import {
 } from "../ui/form";
 import { Textarea } from "../ui/textarea";
 import { FileUp, Loader2, XIcon } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { imgUpload } from "@/utils/imgUpload";
 import api from "@/api/api";
 import useEditProduct from "@/context/editProduct";
 import { ScrollArea } from "../ui/scroll-area";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import useUser from "@/context/useUser";
+import usePermissions from "@/context/usePermissions";
+
+type sellerSelect = {
+  name: string;
+  id: string;
+};
 
 export default function ProductForm() {
   const { product, setDialog } = useEditProduct();
+  const { users } = useUser();
+  const { permissions } = usePermissions();
+
+  const [sellerArr, setSellerArr] = useState<sellerSelect[]>([]);
+  const [seller, setSeller] = useState("");
+
+  useEffect(() => {
+    if (product) {
+      const user = users?.find((user) => user.id === product.sellerId);
+      setSeller(user?.name || "");
+    }
+  }, [product, users]);
+
+  useEffect(() => {
+    const sellers = users?.filter((user) =>
+      permissions?.find(
+        (permission) =>
+          permission.id === user.permissionId && permission.name === "seller"
+      )
+    );
+    setSellerArr(
+      sellers?.map((seller) => ({ name: seller.name, id: seller.id })) || []
+    );
+  }, [users, permissions]);
 
   const [loading, setLoading] = useState(false);
 
@@ -40,6 +78,7 @@ export default function ProductForm() {
       formulation: product ? product?.formulation || "" : "",
       price: parseFloat(product ? product?.price.toString() || "0" : "0"),
       type: product ? product?.type || "" : "",
+      sellerId: product ? product?.sellerId || "" : "",
     },
   });
 
@@ -68,6 +107,7 @@ export default function ProductForm() {
       formulation: values.formulation || "",
       cultures: values.cultures || [""],
       aplication: values.application || "",
+      sellerId: values.sellerId || "",
     };
 
     product
@@ -89,7 +129,7 @@ export default function ProductForm() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 p-4">
         <ScrollArea className="h-[45rem] text-black">
-          <div className="p-2">
+          <div className="p-2 gap-8 flex flex-col">
             <div className="flex w-[40rem] justify-between gap-4">
               <FormField
                 control={form.control}
@@ -279,6 +319,35 @@ export default function ProductForm() {
                       </div>
                     </div>
                   </FormControl>
+                  <FormDescription>
+                    Imagem do produto que será cadastrado.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="sellerId"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Selecione o vendedor que será responsável pelo produto
+                  </FormLabel>
+                  <Select onValueChange={field.onChange}>
+                    <FormControl>
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Selecione um vendedor" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {sellerArr?.map((seller, index) => (
+                        <SelectItem key={index} value={seller.id}>
+                          {seller.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <FormDescription>
                     Imagem do produto que será cadastrado.
                   </FormDescription>
