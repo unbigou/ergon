@@ -8,17 +8,17 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "../ui/button";
-import { Product } from "@/utils/types";
+import { ProductRes } from "@/utils/types";
 import Link from "next/link";
 
 type CardProps = {
-  product: Product;
+  product: ProductRes;
 };
 
 const CardsFunc = ({ product }: CardProps) => {
   return (
     <div className="w-fit">
-      <Card>
+      <Card className="h-full">
         <CardHeader>
           <CardTitle>{product.name}</CardTitle>
           <CardDescription>{product.type}</CardDescription>
@@ -26,13 +26,18 @@ const CardsFunc = ({ product }: CardProps) => {
         <CardContent className="items-center flex flex-col">
           <Image
             className=""
-            src="/mambore.png" // product.image
+            src={
+              product.photo
+                ? product.photo[0]
+                : "/notFound.png"
+            } // product.image
             alt="logo"
+            priority
             width={150}
             height={150}
           />
-          <p>Vithor sexy</p>
-          <div className="text-justify">A descrição é verdadeira!</div>
+          <p>{product.name}</p>
+          <div className="text-justify">{product.type}</div>
         </CardContent>
         <CardFooter className="justify-center flex">
           <Link

@@ -1,10 +1,10 @@
 import { Request, RequestHandler, Response, Router, response} from "express";
 import { UserRepository } from "../repositories/UserRepository";
-import { CreateUserController } from "./controllers/CreateUserController";
-import { GetUserController } from "./controllers/GetUserController";
-import { ListUsersController } from "./controllers/ListUserController";
-import { UpdateUserController } from "./controllers/UpdateUserController";
-import { DeleteUserController } from "./controllers/DeleteUserController";
+import { CreateUserController } from "./controllers/user/CreateUserController";
+import { GetUserController } from "./controllers/user/GetUserController";
+import { ListUsersController } from "./controllers/user/ListUserController";
+import { UpdateUserController } from "./controllers/user/UpdateUserController";
+import { DeleteUserController } from "./controllers/user/DeleteUserController";
 import { resolveController } from "../adapters/resolverController";
 import { HashRepository } from "../repositories/HashRepository";
 import { IUserRepository } from "../interfaces/IUserRepository";

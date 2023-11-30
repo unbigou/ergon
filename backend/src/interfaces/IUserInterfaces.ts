@@ -2,12 +2,9 @@ export interface IUser {
     id: string;
     name: string;
     email: string;
-    userType: string;
+    permissionId: string;
     password: string;
-    cpf: string;
     phoneNumber: string;
-    gender: string;
-    birthDate: string;
     createdAt?: Date;
     updatedAt?: Date;
 }
@@ -17,12 +14,9 @@ export interface IUserCreateRequest {
     email: string;
     confirmEmail: string;
     password: string;
-    userType: string;
+    permissionId: string;
     confirmPassword: string;
-    cpf: string;
     phoneNumber: string;
-    gender: string;
-    birthDate: Date;
 }
 
 export interface IUserGetRequest{
@@ -34,11 +28,8 @@ export interface IUserUpdateRequest{
     name: string;
     email: string;
     password: string;
-    userType: string;
-    cpf: string;
+    permissionId: string;
     phoneNumber: string;
-    gender: string;
-    birthDate: Date;
 }
 
 export interface IUserDeleteRequest{

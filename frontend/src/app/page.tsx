@@ -1,42 +1,31 @@
 "use client";
 
-import FilteredProducts from "@/components/mainPage/FilteredProducts";
-import MainSection from "@/components/mainPage/MainSection";
-import useProducts from "@/context/useProducts";
-import { useEffect } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Login from "@/components/authPage/login";
+import Register from "@/components/authPage/register";
 
-export default function Home({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
-  const { filteredProducts, setFilteredProducts, products } = useProducts();
-
-  useEffect(() => {
-    searchParams.search
-      ? setFilteredProducts(
-          searchParams.search === ""
-            ? false
-            : products.filter((product) =>
-                product.name
-                  .normalize("NFD")
-                  .replace(/[\u0300-\u036f]/g, "")
-                  .toLowerCase()
-                  .includes(
-                    searchParams
-                      .search!.toString()
-                      .normalize("NFD")
-                      .replace(/[\u0300-\u036f]/g, "")
-                      .toLowerCase()
-                  )
-              )
-        )
-      : setFilteredProducts(false);
-  }, [products, searchParams.search, setFilteredProducts]);
-
+export default function AuthPage() {
   return (
-    <main className="flex min-h-screen w-full flex-col items-center justify-between px-60 py-24">
-      {!filteredProducts === false ? <FilteredProducts /> : <MainSection />}
+    <main className="flex justify-center mt-44">
+      <Tabs
+        defaultValue="login"
+        className="flex flex-col bg-slate-100 p-10 shadow-md"
+      >
+        <TabsList className="mb-3 w-80 bg-slate-200">
+          <TabsTrigger value="login" className=" w-32 text-center">
+            Entrar
+          </TabsTrigger>
+          <TabsTrigger value="signup" className="w-32">
+            Criar conta
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value="login">
+          <Login />
+        </TabsContent>
+        <TabsContent value="signup">
+          <Register />
+        </TabsContent>
+      </Tabs>
     </main>
   );
 }
