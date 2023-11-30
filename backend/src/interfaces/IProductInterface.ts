@@ -7,6 +7,7 @@ export interface IProduct {
     formulation: string;
     cultures: string[];
     aplication: string;
+    sellerId: string;
     createdAt?: Date;
     updatedAt?: Date;
 }
@@ -17,6 +18,7 @@ export interface IProductCreateRequest{
     type: string;
     photo: string[];
     formulation: string;
+    sellerId: string;
     cultures: string[];
     aplication: string;
 }
@@ -34,6 +36,7 @@ export interface IProductUpdateRequest{
     formulation: string;
     cultures: string[];
     aplication: string;
+    sellerId: string;
 }
 
 export interface IProductDeleteRequest{

@@ -4,7 +4,7 @@ import { IProductUpdateRequest } from "../../interfaces/IProductInterface";
 
 export class UpdateProductService{
     constructor(private productRepo: IProductRepository){}
-    async execute({id, name, price, type, photo, formulation, cultures, aplication}: IProductUpdateRequest): Promise<void>{
+    async execute({id, name, price, type, photo, formulation, cultures, aplication, sellerId}: IProductUpdateRequest): Promise<void>{
         const result = await this.productRepo.findOneProduct(id)
 
         const product = new Product({
@@ -14,7 +14,8 @@ export class UpdateProductService{
             photo: photo || result.photo,
             formulation: formulation || result.formulation,
             cultures: cultures || result.cultures,
-            aplication: aplication || result.aplication
+            aplication: aplication || result.aplication,
+            sellerId: sellerId || result.sellerId
         }, result.id)
 
         await this.productRepo.update(product.toJson(), id)

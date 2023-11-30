@@ -1,8 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import useUser from "@/context/useUser";
 import { ProductRes } from "@/utils/types";
+import { Phone } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function InfoPage({
@@ -11,6 +14,7 @@ export default function InfoPage({
   params: { product: string[] };
 }) {
   const [product, setProduct] = useState<ProductRes | null>(null);
+  const { users } = useUser();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -49,17 +53,29 @@ export default function InfoPage({
             <p className="text-sm"> à vista</p>
           </div>
           <p className="text-darkGreen font-semibold mt-10">Fomulação</p>
-          <li className="text-sm ml-2">{product?.formulation}</li> 
+          <li className="text-sm ml-2">{product?.formulation}</li>
           <p className="text-darkGreen font-semibold mt-4">Culturas</p>
-             {
-               product?.cultures?.map((culture, index) => (
-                <li className="text-sm ml-2" key={index}>{culture}</li>
-              ))
-             }
+          {product?.cultures?.map((culture, index) => (
+            <li className="text-sm ml-2" key={index}>
+              {culture}
+            </li>
+          ))}
           <p className="text-darkGreen font-semibold mt-4">Aplicação</p>
-           <li className="text-sm ml-2">{product?.aplication}</li>
+          <li className="text-sm ml-2">{product?.aplication}</li>
           <Button className="bg-darkGreen hover:bg-green-900 mt-14">
-            Falar com o vendedor
+            <Link
+              href={`https://wa.me/${
+                users?.find((user) => user.id === product?.sellerId)
+                  ?.phoneNumber
+              }?text=Olá, gostaria de saber mais sobre o produto ${
+                product?.name
+              }`}
+              target="_blank"
+              className="flex items-center gap-2"
+            >
+              <Phone size={16} className="mr-2" />
+              Falar com o vendedor
+            </Link>
           </Button>
         </div>
       </div>

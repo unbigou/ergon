@@ -127,4 +127,8 @@ export const productSchema = z.object({
     invalid_type_error: "A aplicação não pode ser vazia.",
     required_error: "A aplicação não pode ser vazia.",
   }),
+  sellerId: z.string({
+    invalid_type_error: "O vendedor não pode ser vazio.",
+    required_error: "O vendedor não pode ser vazio.",
+  }),
 });

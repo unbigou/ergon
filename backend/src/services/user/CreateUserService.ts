@@ -41,11 +41,11 @@ export class CreateUserService {
       throw new AppError("Usuário já cadastrado");
     }
 
-    if (!validatePassword(password)) {
-      throw new AppError(
-        "A senha deve ter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial."
-      );
-    }
+    // if (!validatePassword(password)) {
+    //   throw new AppError(
+    //     "A senha deve ter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial."
+    //   );
+    // }
 
     if (!validateConfimPassword(password, confirmPassword)) {
       throw new AppError("As senhas não são iguais.");

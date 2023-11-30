@@ -7,6 +7,13 @@ export type ProductRes = {
   formulation?: string;
   cultures?: string[];
   aplication?: string;
+  sellerId: string;
+};
+
+export type PermissionRes = {
+  id: string;
+  name: string;
+  description: string[];
 };
 
 export type user = {
@@ -53,6 +60,7 @@ export type ProductReq = {
   formulation?: string;
   cultures?: string[];
   aplication?: string;
+  sellerId: string;
 };
 
 // export const tenProductList = [

@@ -10,6 +10,7 @@ export class Product{
     formulation: IProduct['formulation'];
     cultures: IProduct['cultures'];
     aplication: IProduct['aplication'];
+    sellerId: IProduct['sellerId'];
     createdAt: IProduct['createdAt'];
     updatedAt: IProduct['updatedAt'];
 
@@ -21,6 +22,7 @@ export class Product{
         this.photo = props.photo;
         this.formulation = props.formulation;
         this.cultures = props.cultures;
+        this.sellerId = props.sellerId;
         this.aplication = props.aplication;
         this.createdAt = props.createdAt || new Date();
         this.updatedAt = new Date();
@@ -36,6 +38,7 @@ export class Product{
                 formulation: this.formulation,
                 cultures: this.cultures,
                 aplication: this.aplication,
+                sellerId: this.sellerId,
                 createdAt: this.createdAt,
                 updatedAt: this.updatedAt
             }
