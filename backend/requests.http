@@ -1,0 +1,14 @@
+### Create Product
+POST http://localhost:3333/product
+Content-Type: application/json
+x-api-key: YOUR_API_KEY
+
+{
+    "name": "string",
+    "price": "string",
+    "type": "string",
+    "photo": "string",
+    "formulation": "string",
+    "cultures": "string",
+    "aplication": "string"
+}
