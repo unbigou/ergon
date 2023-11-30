@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import useUser from "@/context/useUser";
 import { ProductRes } from "@/utils/types";
 import { Phone } from "lucide-react";
 import Image from "next/image";
@@ -13,6 +14,7 @@ export default function InfoPage({
   params: { product: string[] };
 }) {
   const [product, setProduct] = useState<ProductRes | null>(null);
+  const { users } = useUser();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -62,7 +64,12 @@ export default function InfoPage({
           <li className="text-sm ml-2">{product?.aplication}</li>
           <Button className="bg-darkGreen hover:bg-green-900 mt-14">
             <Link
-              href={`https://wa.me/44997332088?text=Olá, gostaria de saber mais sobre o produto ${product?.name}`}
+              href={`https://wa.me/${
+                users?.find((user) => user.id === product?.sellerId)
+                  ?.phoneNumber
+              }?text=Olá, gostaria de saber mais sobre o produto ${
+                product?.name
+              }`}
               target="_blank"
               className="flex items-center gap-2"
             >
