@@ -32,6 +32,7 @@ export class UpdatedReviewService{
             cultures: prod.cultures,
             aplication: prod.aplication,
             promotionPrice: prod.promotionPrice,
+            sellerId: prod.sellerId,
             newPrice: prod.newPrice,
             ratingCont: ratingContCalc(prod.ratingCont || "0"),
             ratingMax: ratingMaxCalc(prod.ratingMax || "0", rating),

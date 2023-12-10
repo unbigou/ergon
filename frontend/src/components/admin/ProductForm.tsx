@@ -32,6 +32,7 @@ import {
 } from "../ui/select";
 import useUser from "@/context/useUser";
 import usePermissions from "@/context/usePermissions";
+import { useToast } from "../ui/use-toast";
 
 type sellerSelect = {
   name: string;
@@ -42,6 +43,7 @@ export default function ProductForm() {
   const { product, setDialog } = useEditProduct();
   const { users } = useUser();
   const { permissions } = usePermissions();
+  const { toast } = useToast();
 
   const [sellerArr, setSellerArr] = useState<sellerSelect[]>([]);
   const [seller, setSeller] = useState("");
@@ -110,17 +112,31 @@ export default function ProductForm() {
       sellerId: values.sellerId || "",
     };
 
-    product
-      ? await api.put(`/product/${product.id}`, req, {
-          headers: {
-            "x-api-key": "YOUR_API_KEY",
-          },
-        })
-      : await api.post("/product", req, {
-          headers: {
-            "x-api-key": "YOUR_API_KEY",
-          },
-        });
+    try {
+      product
+        ? await api.put(`/product/${product.id}`, req, {
+            headers: {
+              "x-api-key": "YOUR_API_KEY",
+            },
+          })
+        : await api.post("/product", req, {
+            headers: {
+              "x-api-key": "YOUR_API_KEY",
+            },
+          });
+
+      toast({
+        title: "Sucesso",
+        description: "Produto cadastrado com sucesso",
+      });
+    } catch (err) {
+      console.log(err);
+      toast({
+        title: "Erro",
+        description: "Ocorreu um erro ao cadastrar o produto",
+        variant: "destructive",
+      });
+    }
     setLoading(false);
     setDialog(false);
   }

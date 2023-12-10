@@ -2,12 +2,20 @@ export type ProductRes = {
   id: string;
   name: string;
   price: string;
+  promotionPrice: string;
+  newPrice: string;
   type: string;
-  photo?: string[];
-  formulation?: string;
-  cultures?: string[];
-  aplication?: string;
+  photo: string[];
+  formulation: string;
+  cultures: string[];
+  aplication: string;
   sellerId: string;
+  stock: boolean;
+  rating: string;
+  ratingCont: string;
+  ratingMax: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 };
 
 export type PermissionRes = {
@@ -55,12 +63,15 @@ export type authRes = {
 export type ProductReq = {
   name: string;
   price: string;
+  promotionPrice: string;
+  newPrice: string;
   type: string;
   photo?: string[];
-  formulation?: string;
-  cultures?: string[];
-  aplication?: string;
+  formulation: string;
   sellerId: string;
+  cultures: string[];
+  aplication: string;
+  stock: boolean;
 };
 
 // export const tenProductList = [
