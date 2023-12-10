@@ -3,10 +3,40 @@ import { AppError } from "../../errors/AppError";
 import { IProductRepository } from "../../interfaces/IProductRepository";
 import { IProductCreateRequest } from "../../interfaces/IProductInterface";
 
-export class CreateProductService{
-    constructor(private productRepo: IProductRepository){}
-    async execute({name, price, type, photo, formulation, cultures, aplication, sellerId}: IProductCreateRequest): Promise<void>{
-        const product = new Product({name, price, type, photo, formulation, cultures, aplication, sellerId})
-        await this.productRepo.insert(product.toJson())
-    }
+export class CreateProductService {
+  constructor(private productRepo: IProductRepository) {}
+  async execute({
+    name,
+    price,
+    type,
+    photo,
+    formulation,
+    cultures,
+    aplication,
+    promotionPrice,
+    stock,
+    sellerId,
+  }: IProductCreateRequest): Promise<void> {
+    const rating = "0";
+    const ratingCont = "0";
+    const ratingMax = "0";
+    const newPrice = price;
+    const product = new Product({
+      name,
+      price,
+      type,
+      photo,
+      formulation,
+      cultures,
+      aplication,
+      promotionPrice,
+      newPrice,
+      stock,
+      rating,
+      ratingCont,
+      ratingMax,
+      sellerId,
+    });
+    await this.productRepo.insert(product.toJson());
+  }
 }

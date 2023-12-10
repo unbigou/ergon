@@ -1,5 +1,5 @@
 import { IProductRepository } from "../interfaces/IProductRepository";
-import { IProduct } from "../interfaces/IProductInterface";
+import { IProduct, IProductCreateRequest } from "../interfaces/IProductInterface";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();

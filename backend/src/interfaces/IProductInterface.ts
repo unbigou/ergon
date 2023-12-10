@@ -2,12 +2,18 @@ export interface IProduct {
     id: string;
     name: string;
     price: string;
+    promotionPrice: string;
+    newPrice: string;
     type: string;
     photo: string[];
     formulation: string;
     cultures: string[];
     aplication: string;
     sellerId: string;
+    stock: boolean;
+    rating: string;
+    ratingCont: string;
+    ratingMax: string;
     createdAt?: Date;
     updatedAt?: Date;
 }
@@ -15,12 +21,15 @@ export interface IProduct {
 export interface IProductCreateRequest{
     name: string;
     price: string;
+    promotionPrice: string;
+    newPrice: string;
     type: string;
     photo: string[];
     formulation: string;
     sellerId: string;
     cultures: string[];
     aplication: string;
+    stock: boolean;
 }
 
 export interface IProductGetRequest{
@@ -31,12 +40,14 @@ export interface IProductUpdateRequest{
     id: string;
     name: string;
     price: string;
+    promotionPrice: string;
     type: string;
     photo: string[];
     formulation: string;
     cultures: string[];
     aplication: string;
     sellerId: string;
+    stock: boolean;
 }
 
 export interface IProductDeleteRequest{
