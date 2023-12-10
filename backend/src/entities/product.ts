@@ -26,7 +26,7 @@ export class Product{
         this.id = id || createUUID();
         this.name = props.name;
         this.price = props.price;
-        this.promotionPrice = "1";
+        this.promotionPrice = props.promotionPrice;
         this.newPrice = promotionCalc(this.price, this.promotionPrice);
         this.type = props.type;
         this.photo = props.photo;
@@ -34,9 +34,9 @@ export class Product{
         this.cultures = props.cultures;
         this.sellerId = props.sellerId;
         this.aplication = props.aplication;
-        this.rating = "0";
-        this.ratingCont = "0";
-        this.ratingMax = "0";
+        this.rating = props.rating;
+        this.ratingCont = props.ratingCont || "0";
+        this.ratingMax = props.ratingMax || "0";
         this.stock = props.stock;
         this.createdAt = props.createdAt || new Date();
         this.updatedAt = new Date();

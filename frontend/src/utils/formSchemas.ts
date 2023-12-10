@@ -64,6 +64,25 @@ export const registerSchema = z.object({
     }),
 });
 
+export const reviewSchema = z.object({
+  rating: z.string({
+    invalid_type_error: "A nota precisa ser um número.",
+    required_error: "A nota não pode ser vazia.",
+  }),
+  comentary: z.string({
+    invalid_type_error: "O comentário precisa ser um texto.",
+    required_error: "O comentário não pode ser vazio.",
+  }),
+  productId: z.string({
+    invalid_type_error: "O produto não pode ser vazio.",
+    required_error: "O produto não pode ser vazio.",
+  }),
+  userId: z.string({
+    invalid_type_error: "O usuário não pode ser vazio.",
+    required_error: "O usuário não pode ser vazio.",
+  }),
+});
+
 export const productSchema = z.object({
   name: z
     .string({
@@ -131,4 +150,15 @@ export const productSchema = z.object({
     invalid_type_error: "O vendedor não pode ser vazio.",
     required_error: "O vendedor não pode ser vazio.",
   }),
+  promotionPrice: z
+    .number({
+      invalid_type_error: "O preço da promoção precisa ser um número.",
+      required_error: "O preço da promoção não pode ser vazio.",
+    })
+    .positive({
+      message: "O preço da promoção precisa ser positivo.",
+    })
+    .refine((val) => val > 0 && val < 100, {
+      message: "O preço da promoção precisa ser positivo e menor que 100.",
+    }).optional(),
 });

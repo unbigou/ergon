@@ -12,7 +12,6 @@ export default function MainLayout({
 }) {
   const { getUser, permission } = useAuth();
 
-
   useEffect(() => {
     getUser();
   }, []);
@@ -22,7 +21,7 @@ export default function MainLayout({
       <Header />
       <div className="flex h-screen">
         {permission === "admin" ? <Navbar /> : null}
-        {children}
+        <div className="overflow-y-auto w-full bg-gray-100">{children}</div>
       </div>
     </section>
   );

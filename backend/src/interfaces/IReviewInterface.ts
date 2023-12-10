@@ -23,6 +23,10 @@ export interface IReviewGetByUserRequest{
     userId: string;
 }
 
+export interface IReviewGetByProductRequest{
+    productId: string;
+}
+
 export interface IReviewDeleteRequest{
     id: string;
 }

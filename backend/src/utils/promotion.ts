@@ -1,9 +1,10 @@
-export function promotionCalc(price: string, promotionPrice: string){
-    const Price = parseFloat(price)
-    const PromotionPrice = parseFloat(promotionPrice)
+export function promotionCalc(price: string, promotionPrice: string) {
+  const Price = parseFloat(price);
+  const PromotionPrice = parseFloat(promotionPrice);
 
-    let NewPrice = (Price*PromotionPrice)/100;
+  if (promotionPrice === "1") return price.toString();
 
-    return NewPrice.toString();
+  let NewPrice = Price - (Price * PromotionPrice) / 100;
 
+  return NewPrice.toString();
 }
