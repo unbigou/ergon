@@ -1,20 +1,10 @@
 "use client";
 
+import ImageZoom from "@/components/Product/ProductImage";
 import { Button } from "@/components/ui/button";
 import { ProductRes } from "@/utils/types";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-
-// const product = {
-//   id: "95",
-//   name: "Bactérias",
-//   price: "R$ 10,00",
-//   type: "Bactérias",
-//   photo: "/mambore.png",
-//   formulation: "Líquida",
-//   cultures: "Bacillus subtilis",
-//   aplication: "Foliar",
-// };
 
 export default function InfoPage({
   params,
@@ -40,7 +30,9 @@ export default function InfoPage({
   return (
     <main className="flex min-h-screen w-full flex-col items-center justify-between px-60 py-24">
       <div className="flex flex-row mt-20">
-        <Image src={`/mambore.png`} alt="logo" width={300} height={300} />
+        <div className="">
+          <ImageZoom/>
+        </div>
         <div className="flex flex-col ml-24">
           <h1 className="semi-bold text-2xl">{product?.name}</h1>
           <div className="mt-20 flex flex-row items-center gap-2">
