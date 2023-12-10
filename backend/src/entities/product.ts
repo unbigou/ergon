@@ -34,9 +34,9 @@ export class Product{
         this.cultures = props.cultures;
         this.sellerId = props.sellerId;
         this.aplication = props.aplication;
-        this.rating = "0";
-        this.ratingCont = "0";
-        this.ratingMax = "0";
+        this.rating = props.rating;
+        this.ratingCont = props.ratingCont || "0";
+        this.ratingMax = props.ratingMax || "0";
         this.stock = props.stock;
         this.createdAt = props.createdAt || new Date();
         this.updatedAt = new Date();

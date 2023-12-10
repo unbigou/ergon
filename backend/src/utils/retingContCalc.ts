@@ -3,5 +3,5 @@ export function ratingContCalc(ratingCont: string){
 
     result = result+1;
 
-    return ratingCont.toString();
+    return result.toString();
 }

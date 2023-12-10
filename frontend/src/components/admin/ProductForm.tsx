@@ -33,6 +33,7 @@ import {
 import useUser from "@/context/useUser";
 import usePermissions from "@/context/usePermissions";
 import { useToast } from "../ui/use-toast";
+import { ProductReq, ProductRes } from "@/utils/types";
 
 type sellerSelect = {
   name: string;
@@ -110,7 +111,10 @@ export default function ProductForm() {
       cultures: values.cultures || [""],
       aplication: values.application || "",
       sellerId: values.sellerId || "",
-    };
+      newPrice: values.price || "",
+      promotionPrice: values.price || "",
+      stock: true,
+    } as ProductReq;
 
     try {
       product

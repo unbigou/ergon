@@ -6,6 +6,7 @@ export class UpdateProductService{
     constructor(private productRepo: IProductRepository){}
     async execute({id, name, price, type, photo, formulation, cultures, aplication, promotionPrice, stock, sellerId}: IProductUpdateRequest): Promise<void>{
         const result = await this.productRepo.findOneProduct(id)
+        console.log(result)
 
         const product = new Product({
             name: name || result.name,

@@ -74,6 +74,23 @@ export type ProductReq = {
   stock: boolean;
 };
 
+export type ReviewReq = {
+  rating: string;
+  comentary: string;
+  userId: string;
+  productId: string;
+};
+
+export type ReviewRes = {
+  id: string;
+  rating: string;
+  comentary: string;
+  userId: string;
+  productId: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+};
+
 // export const tenProductList = [
 //   {
 //     id:"95",
