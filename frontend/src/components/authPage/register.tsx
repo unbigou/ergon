@@ -17,6 +17,7 @@ import { Button } from "../ui/button";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { useToast } from "../ui/use-toast";
+import api from "@/api/api";
 
 const Register = () => {
   const [seePassword, setSeePassword] = useState(false);
@@ -56,7 +57,32 @@ const Register = () => {
       });
     }
 
-    console.log(data);
+    try {
+      await api.post(
+        "/user",
+        {
+          email: data.email,
+          confirmEmail: data.confirmEmail,
+          password: data.password,
+          confirmPassword: data.confirmPassword,
+          phoneNumber: "",
+          permissionId: "651116cc-7a79-47d4-867b-1c7d8e8fb326",
+          name: "", 
+        },
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_API_KEY,
+          },
+        }
+      );
+
+      toast({
+        title: "Sucesso",
+        description: "Usuário cadastrado com sucesso",
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
