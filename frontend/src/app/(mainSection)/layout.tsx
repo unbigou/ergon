@@ -4,6 +4,7 @@ import Navbar from "@/components/admin/navBar";
 import Header from "@/components/mainPage/Header";
 import useAuth from "@/context/useAuth";
 import { useEffect } from "react";
+import Footer from "./footer/page";
 
 export default function MainLayout({
   children,
@@ -24,6 +25,7 @@ export default function MainLayout({
         {permission === "admin" ? <Navbar /> : null}
         {children}
       </div>
+      <Footer />
     </section>
   );
 }
