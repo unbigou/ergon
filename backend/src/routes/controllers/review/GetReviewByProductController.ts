@@ -10,7 +10,7 @@ export class GetReviewByProductController {
       this.reviewRepo
     );
     const result = await getReviewByProductSerivce.execute({ productId });
-
+      console.log("productId", result);
     return res.status(200).json(result);
   }
 }

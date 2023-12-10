@@ -52,7 +52,19 @@ export default function InfoPage({
                 {Intl.NumberFormat("pt-BR", {
                   style: "currency",
                   currency: "BRL",
-                }).format(parseFloat(product?.price || "0"))}
+                }).format(
+                  parseFloat(product?.promotionPrice || "0") > 1
+                    ? parseFloat(product?.newPrice || "0")
+                    : parseFloat(product?.price || "0")
+                )}
+                {parseFloat(product?.promotionPrice || "0") > 1 && (
+                  <span className="text-sm text-gray-400 ml-2 line-through">
+                    {Intl.NumberFormat("pt-BR", {
+                      style: "currency",
+                      currency: "BRL",
+                    }).format(parseFloat(product?.price || "0"))}
+                  </span>
+                )}
               </p>
               <p className="text-sm"> à vista</p>
             </div>

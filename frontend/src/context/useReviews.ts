@@ -15,7 +15,8 @@ function useReviews(productId: string) {
   const { data, error, isLoading } = useSWR(
     `/review/product/${productId}`,
     fetcher
-  );
+    );
+    console.log("productId", data);
 
   return {
     reviews: data,

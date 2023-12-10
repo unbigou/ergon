@@ -20,17 +20,20 @@ const CardsFunc = ({ product }: CardProps) => {
     <div className="w-fit">
       <Card className="h-full">
         <CardHeader>
-          <CardTitle>{product.name}</CardTitle>
+          <CardTitle className="relative">
+            {product.name}
+            {parseInt(product.promotionPrice) > 1 ? (
+              <span className="absolute -top-6 z-50 -right-10 bg-red-600 text-white px-2 py-1 rounded-sm origin-center rotate-45">
+                {product.promotionPrice}%
+              </span>
+            ) : null}
+          </CardTitle>
           <CardDescription>{product.type}</CardDescription>
         </CardHeader>
         <CardContent className="items-center flex flex-col">
           <Image
             className=""
-            src={
-              product.photo
-                ? product.photo[0]
-                : "/notFound.png"
-            } // product.image
+            src={product.photo ? product.photo[0] : "/notFound.png"} // product.image
             alt="logo"
             priority
             width={150}

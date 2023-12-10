@@ -150,4 +150,15 @@ export const productSchema = z.object({
     invalid_type_error: "O vendedor não pode ser vazio.",
     required_error: "O vendedor não pode ser vazio.",
   }),
+  promotionPrice: z
+    .number({
+      invalid_type_error: "O preço da promoção precisa ser um número.",
+      required_error: "O preço da promoção não pode ser vazio.",
+    })
+    .positive({
+      message: "O preço da promoção precisa ser positivo.",
+    })
+    .refine((val) => val > 0 && val < 100, {
+      message: "O preço da promoção precisa ser positivo e menor que 100.",
+    }).optional(),
 });

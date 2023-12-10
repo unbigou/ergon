@@ -7,7 +7,7 @@ import { IReviewRepository } from "../../interfaces/IReviewRepository";
 export class GetReviewByProductService {
   constructor(private reviewRepo: IReviewRepository) {}
   async execute({ productId }: IReviewGetByProductRequest): Promise<IReview[]> {
-    const reviews = await this.reviewRepo.findAll(productId);
+    const reviews = await this.reviewRepo.findAllByProduct(productId);
     return reviews;
   }
 }

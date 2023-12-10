@@ -26,7 +26,7 @@ export class Product{
         this.id = id || createUUID();
         this.name = props.name;
         this.price = props.price;
-        this.promotionPrice = "1";
+        this.promotionPrice = props.promotionPrice;
         this.newPrice = promotionCalc(this.price, this.promotionPrice);
         this.type = props.type;
         this.photo = props.photo;

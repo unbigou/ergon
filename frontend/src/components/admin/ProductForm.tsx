@@ -41,7 +41,7 @@ type sellerSelect = {
 };
 
 export default function ProductForm() {
-  const { product, setDialog } = useEditProduct();
+  const { product, setDialog, setProduct } = useEditProduct();
   const { users } = useUser();
   const { permissions } = usePermissions();
   const { toast } = useToast();
@@ -82,6 +82,13 @@ export default function ProductForm() {
       price: parseFloat(product ? product?.price.toString() || "0" : "0"),
       type: product ? product?.type || "" : "",
       sellerId: product ? product?.sellerId || "" : "",
+      promotionPrice: parseFloat(
+        product
+          ? parseFloat(product?.promotionPrice || "0") > 1
+            ? product?.promotionPrice || "0"
+            : "0"
+          : "0"
+      ),
     },
   });
 
@@ -97,6 +104,7 @@ export default function ProductForm() {
     });
     setLoading(false);
     setDialog(false);
+    setProduct(false);
   }
 
   async function onSubmit(values: z.infer<typeof productSchema>) {
@@ -111,8 +119,8 @@ export default function ProductForm() {
       cultures: values.cultures || [""],
       aplication: values.application || "",
       sellerId: values.sellerId || "",
-      newPrice: values.price || "",
-      promotionPrice: values.price || "",
+      newPrice: "",
+      promotionPrice: values.promotionPrice?.toString() || "1",
       stock: true,
     } as ProductReq;
 
@@ -346,35 +354,58 @@ export default function ProductForm() {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="sellerId"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>
-                    Selecione o vendedor que será responsável pelo produto
-                  </FormLabel>
-                  <Select onValueChange={field.onChange}>
+            <div className="flex gap-4">
+              <FormField
+                control={form.control}
+                name="sellerId"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Vendedor responsável pelo produto</FormLabel>
+                    <Select onValueChange={field.onChange}>
+                      <FormControl>
+                        <SelectTrigger className="w-[180px]">
+                          <SelectValue placeholder="Selecione um vendedor" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {sellerArr?.map((seller, index) => (
+                          <SelectItem key={index} value={seller.id}>
+                            {seller.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormDescription>
+                      Selecione o vendedor que será responsável pelo produto.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="promotionPrice"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Preço promocional</FormLabel>
                     <FormControl>
-                      <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="Selecione um vendedor" />
-                      </SelectTrigger>
+                      <Input
+                        placeholder="Ex: 10%"
+                        value={field.value}
+                        onChange={(e) => {
+                          field.onChange(e.target.valueAsNumber);
+                        }}
+                        type="number"
+                      />
                     </FormControl>
-                    <SelectContent>
-                      {sellerArr?.map((seller, index) => (
-                        <SelectItem key={index} value={seller.id}>
-                          {seller.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormDescription>
-                    Imagem do produto que será cadastrado.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <FormDescription>
+                      Preço promocional do produto (opcional) em %.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             <div className="flex w-full items-center justify-between">
               <Button
                 type="button"

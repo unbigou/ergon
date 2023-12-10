@@ -25,7 +25,7 @@ const FormDialog = () => {
     >
       <DialogTrigger asChild>
         <Button className="rounded-sm px-4 py-2 text-white">
-          {product ? "Editar produto" : "Adicionar produto"}
+          {product !== false ? "Editar produto" : "Adicionar produto"}
         </Button>
       </DialogTrigger>
       <DialogContent
@@ -37,7 +37,9 @@ const FormDialog = () => {
       >
         <DialogHeader>
           <DialogTitle>
-            <h3>Editar produto {product ? product.name : null}</h3>
+            {product !== false
+              ? `Editar produto ${product.name}`
+              : "Adicionar produto"}
           </DialogTitle>
           <DialogDescription>
             <ProductForm />
