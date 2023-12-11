@@ -6,12 +6,12 @@ import {
   validateEmail,
   validatePassword,
   validatePhoneNumber,
-} from '../utils/validate';
-import { User } from '../entities/user';
-import { IUserRepository } from '../interfaces/IUserRepository';
-import { IUser, IUserCreateRequest } from '../interfaces/IUserInterfaces';
-import { AppError } from '../errors/AppError';
-import { IHashRepository } from '../interfaces/IHashRepository';
+} from "../utils/validate";
+import { User } from "../entities/user";
+import { IUserRepository } from "../interfaces/IUserRepository";
+import { IUser, IUserCreateRequest } from "../interfaces/IUserInterfaces";
+import { AppError } from "../errors/AppError";
+import { IHashRepository } from "../interfaces/IHashRepository";
 
 export class CreateUserService {
   constructor(
@@ -20,51 +20,41 @@ export class CreateUserService {
   ) {}
   async execute({
     name,
-    gender,
     email,
     password,
-    userType,
-    birthDate,
-    cpf,
+    permissionId,
     phoneNumber,
     confirmEmail,
     confirmPassword,
   }: IUserCreateRequest): Promise<IUser> {
-
     if (!validateEmail(email)) {
-      throw new AppError('Email inválido');
+      throw new AppError("Email inválido");
     }
 
     if (!validateConfirmEmail(email, confirmEmail)) {
-      throw new AppError('Os emails não são iguais.');
+      throw new AppError("Os emails não são iguais.");
     }
 
     const userExists = await this.userRepo.findByEmail(email);
 
     if (userExists !== null) {
-      throw new AppError('Usuário já cadastrado');                     
+      throw new AppError("Usuário já cadastrado");
     }
 
     if (!validatePassword(password)) {
       throw new AppError(
-        'A senha deve ter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial.'
+        "A senha deve ter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial."
       );
     }
 
     if (!validateConfimPassword(password, confirmPassword)) {
-      throw new AppError('As senhas não são iguais.');
+      throw new AppError("As senhas não são iguais.");
     }
-
-    if (!validateBirthDate(birthDate)) {
-      throw new AppError('Data de nascimento inválida');
-    }
-
-    if (!validateCpf(cpf)) {
-      throw new AppError('CPF inválido');
-    }
-
-    if (!validatePhoneNumber(phoneNumber)) {
-      throw new AppError('Telefone inválido');
+    
+    if (phoneNumber !== "") {
+      if (!validatePhoneNumber(phoneNumber)) {
+        throw new AppError("Telefone inválido");
+      }
     }
 
     password = await this.hashRepo.cryptographie(password);
@@ -73,15 +63,11 @@ export class CreateUserService {
       name,
       email,
       password,
-      userType,
-      birthDate: birthDate.toString(),
-      gender,
-      cpf,
+      permissionId,
       phoneNumber,
     });
-  
-    
+
     const userCreated = await this.userRepo.insert(user.toJson());
-    return { ...userCreated, password: '' };
+    return { ...userCreated, password: "" };
   }
 }

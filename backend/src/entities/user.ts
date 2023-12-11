@@ -2,15 +2,13 @@ import { IUser } from "../interfaces/IUserInterfaces";
 import { createUUID } from "../utils/createUUID";
 
 export class User{
-    id: IUser['id'];
-    name: IUser['name'];
-    email: IUser['email'];
-    userType: IUser['userType'];
-    password: IUser['password'];
-    cpf: IUser['cpf'];
+    id:          IUser['id'];
+    name:        IUser['name'];
+    email:       IUser['email'];
+    permissions: IUser['permissionId'];
+    password:    IUser['password'];
     phoneNumber: IUser['phoneNumber'];
-    gender: IUser['gender'];
-    birthDate: IUser['birthDate'];
+    cart: IUser['cart'];
     toNotificate?: IUser['toNotificate']
     createdAt?: IUser['createdAt'];
     updatedAt?: IUser['updatedAt'];
@@ -19,12 +17,10 @@ export class User{
         this.id = id || createUUID();
         this.name = props.name;
         this.email = props.email;
-        this.userType = props.userType;
+        this.permissions = props.permissionId;
         this.password = props.password;
-        this.cpf = props.cpf;
-        this.phoneNumber = props.phoneNumber;
-        this.gender = props.gender;
-        this.birthDate = props.birthDate;
+        this.phoneNumber = props.phoneNumber || '';
+        this.cart = props.cart || [];
         this.toNotificate = props.toNotificate;
         this.createdAt = props.createdAt || new Date();
         this.updatedAt = new Date();
@@ -36,11 +32,9 @@ export class User{
                 name: this.name,
                 email: this.email,
                 password: this.password,
-                userType: this.userType,
-                cpf: this.cpf,
+                permissionId: this.permissions,
                 phoneNumber: this.phoneNumber,
-                gender: this.gender,
-                birthDate: this.birthDate,
+                cart: this.cart,
                 toNotificate: this.toNotificate,
                 createdAt: this.createdAt,
                 updatedAt: this.updatedAt

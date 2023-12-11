@@ -6,5 +6,5 @@ export interface IProductRepository {
     insert(props: IProduct): Promise<void>
     update(props: IProduct, id: string): Promise<void>
     delete(id: string): Promise<void>
-    findByType(type: IProduct["type"]): Promise<IProduct[]>
+    findByType(type: string): Promise<IProduct[]>
 }

@@ -10,26 +10,17 @@ export class UserRepository implements IUserRepository {
     private cryptoRepo: ICryptoRepository,
   ) {}
 
-  async findAll(): Promise<IUser[]> {
-    let result = await prisma.user.findMany();
-    await Promise.all(
-      result.map(
-        async (user: IUser) =>
-          (user = { ...user, ...(await this.cryptoRepo.useDecryptoUser(user)) })
-      )
-      
-    );
-    return result;
-  }
+    async findAll(): Promise<IUser[]> {
+        let result = await prisma.user.findMany();
+        
+        return result;
+    }
 
-  async insert(props: IUser): Promise<IUser> {
-    props = await this.cryptoRepo.useEncryptoUser(props);
-    const user = await prisma.user.create({
-      data: props,
-    });
-
-    return user;
-  }
+    async insert(props: IUser): Promise<void> {
+        await prisma.user.create({
+            data: props,
+        });
+    }
 
   async findOneUser(id: string): Promise<IUser> {
     let result = await prisma.user.findUnique({
@@ -37,12 +28,12 @@ export class UserRepository implements IUserRepository {
     });
 
     if (!result) throw new Error('User not found');
-    result = { ...result, ...await this.cryptoRepo.useDecryptoUser(result) };
     return result;
   }
 
   async update(props: IUser, id: string): Promise<void> {
-    props = await this.cryptoRepo.useEncryptoUser(props);
+    // props = await this.cryptoRepo.useEncryptoUser(props);
+    console.log(props)
     await prisma.user.update({
       where: { id },
       data: props,
@@ -55,15 +46,11 @@ export class UserRepository implements IUserRepository {
     });
   }
 
-  async findByEmail(email: IUser['email']): Promise<IUser | null> {
-    email = await this.cryptoRepo.encrypt(email);
+  async findByEmail(email: string): Promise<IUser | null> {
     let result = await prisma.user.findFirst({
       where: { email },
     });
-    if(result) result = { ...result, ...await this.cryptoRepo.useDecryptoUser(result) };
-    // Verificar uma maneira melho de implementar porque o primeiro caso sempre é null
-    // if (!result !== null || result !== null) throw new Error('User not found');
-    return result || null;
+    return result;
   }
 
   async findByProduct(productId: string): Promise<IUser[]> {

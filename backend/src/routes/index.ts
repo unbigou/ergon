@@ -4,6 +4,9 @@ import { userAuthenticateRoute } from './authRoute';
 import { userRoute } from './userRoute';
 import { productRoute } from './productRoute';
 import { notificationRoute } from './notificationTest';
+import { reviewRoute } from './reviewRoutes';
+import { permRoute } from './permissionRoute';
+import { contactRoute } from './contactInfoRoute';
 
 export const route = express.Router();
 
@@ -12,3 +15,6 @@ route.use('/auth', userAuthenticateRoute);
 route.use('/user', userRoute);
 route.use('/product', productRoute);
 route.use('/test', notificationRoute);
+route.use('/review', reviewRoute);
+route.use('/permission', permRoute);
+route.use('/contactInfo', contactRoute);

@@ -17,15 +17,56 @@ import {
 } from "../ui/form";
 import { Textarea } from "../ui/textarea";
 import { FileUp, Loader2, XIcon } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { imgUpload } from "@/utils/imgUpload";
 import api from "@/api/api";
 import useEditProduct from "@/context/editProduct";
 import { ScrollArea } from "../ui/scroll-area";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import useUser from "@/context/useUser";
+import usePermissions from "@/context/usePermissions";
+import { useToast } from "../ui/use-toast";
+import { ProductReq, ProductRes } from "@/utils/types";
+
+type sellerSelect = {
+  name: string;
+  id: string;
+};
 
 export default function ProductForm() {
-  const { product, setDialog } = useEditProduct();
+  const { product, setDialog, setProduct } = useEditProduct();
+  const { users } = useUser();
+  const { permissions } = usePermissions();
+  const { toast } = useToast();
+
+  const [sellerArr, setSellerArr] = useState<sellerSelect[]>([]);
+  const [seller, setSeller] = useState("");
+
+  useEffect(() => {
+    if (product) {
+      const user = users?.find((user) => user.id === product.sellerId);
+      setSeller(user?.name || "");
+    }
+  }, [product, users]);
+
+  useEffect(() => {
+    const sellers = users?.filter((user) =>
+      permissions?.find(
+        (permission) =>
+          permission.id === user.permissionId && permission.name === "seller"
+      )
+    );
+    setSellerArr(
+      sellers?.map((seller) => ({ name: seller.name, id: seller.id })) || []
+    );
+  }, [users, permissions]);
 
   const [loading, setLoading] = useState(false);
 
@@ -40,6 +81,14 @@ export default function ProductForm() {
       formulation: product ? product?.formulation || "" : "",
       price: parseFloat(product ? product?.price.toString() || "0" : "0"),
       type: product ? product?.type || "" : "",
+      sellerId: product ? product?.sellerId || "" : "",
+      promotionPrice: parseFloat(
+        product
+          ? parseFloat(product?.promotionPrice || "0") > 1
+            ? product?.promotionPrice || "0"
+            : "0"
+          : "0"
+      ),
     },
   });
 
@@ -55,32 +104,51 @@ export default function ProductForm() {
     });
     setLoading(false);
     setDialog(false);
+    setProduct(false);
   }
 
   async function onSubmit(values: z.infer<typeof productSchema>) {
     setLoading(true);
     const link = await imgUpload(values.file as File[]);
     const req = {
-      name: values.name || "teste",
-      price: values.price.toString() || "teste",
-      type: values.type || "teste",
-      photo: link || ["teste"],
-      formulation: values.formulation || "teste",
-      cultures: values.cultures || ["teste"],
-      aplication: values.application || "teste",
-    };
+      name: values.name || "",
+      price: values.price.toString() || "",
+      type: values.type || "",
+      photo: link || [""],
+      formulation: values.formulation || "",
+      cultures: values.cultures || [""],
+      aplication: values.application || "",
+      sellerId: values.sellerId || "",
+      newPrice: "",
+      promotionPrice: values.promotionPrice?.toString() || "1",
+      stock: true,
+    } as ProductReq;
 
-    product
-      ? await api.put(`/product/${product.id}`, req, {
-          headers: {
-            "x-api-key": "YOUR_API_KEY",
-          },
-        })
-      : await api.post("/product", req, {
-          headers: {
-            "x-api-key": "YOUR_API_KEY",
-          },
-        });
+    try {
+      product
+        ? await api.put(`/product/${product.id}`, req, {
+            headers: {
+              "x-api-key": "YOUR_API_KEY",
+            },
+          })
+        : await api.post("/product", req, {
+            headers: {
+              "x-api-key": "YOUR_API_KEY",
+            },
+          });
+
+      toast({
+        title: "Sucesso",
+        description: "Produto cadastrado com sucesso",
+      });
+    } catch (err) {
+      console.log(err);
+      toast({
+        title: "Erro",
+        description: "Ocorreu um erro ao cadastrar o produto",
+        variant: "destructive",
+      });
+    }
     setLoading(false);
     setDialog(false);
   }
@@ -89,7 +157,7 @@ export default function ProductForm() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 p-4">
         <ScrollArea className="h-[45rem] text-black">
-          <div className="p-2">
+          <div className="p-2 gap-8 flex flex-col">
             <div className="flex w-[40rem] justify-between gap-4">
               <FormField
                 control={form.control}
@@ -286,6 +354,58 @@ export default function ProductForm() {
                 </FormItem>
               )}
             />
+            <div className="flex gap-4">
+              <FormField
+                control={form.control}
+                name="sellerId"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Vendedor responsável pelo produto</FormLabel>
+                    <Select onValueChange={field.onChange}>
+                      <FormControl>
+                        <SelectTrigger className="w-[180px]">
+                          <SelectValue placeholder="Selecione um vendedor" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {sellerArr?.map((seller, index) => (
+                          <SelectItem key={index} value={seller.id}>
+                            {seller.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormDescription>
+                      Selecione o vendedor que será responsável pelo produto.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="promotionPrice"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Preço promocional</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Ex: 10%"
+                        value={field.value}
+                        onChange={(e) => {
+                          field.onChange(e.target.valueAsNumber);
+                        }}
+                        type="number"
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      Preço promocional do produto (opcional) em %.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             <div className="flex w-full items-center justify-between">
               <Button
                 type="button"
