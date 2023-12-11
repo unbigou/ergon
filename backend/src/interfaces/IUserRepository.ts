@@ -7,4 +7,5 @@ export interface IUserRepository {
     update(props: IUser, id: string): Promise<void>
     delete(id: string): Promise<void>
     findByEmail(email: string): Promise<IUser | null>
+    findByProduct(productId: string): Promise<IUser[]>
 }

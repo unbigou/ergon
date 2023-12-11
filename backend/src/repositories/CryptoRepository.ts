@@ -76,7 +76,8 @@ export class CryptoRepository implements ICryptoRepository {
         prop === "cart" ||
         prop === "permissionId" ||
         prop === "password" ||
-        (prop === "phoneNumber" && props[prop] === "")
+        (prop === "phoneNumber" && props[prop] === "") ||
+        prop === 'toNotificate'
       )
         continue;
       if (prop === "phoneNumber")
@@ -96,7 +97,8 @@ export class CryptoRepository implements ICryptoRepository {
         prop === "cart" ||
         prop === "permissionId" ||
         prop === "password" ||
-        (prop === "phoneNumber" && props[prop] === "")
+        (prop === "phoneNumber" && props[prop] === "") ||
+        prop === 'toNotificate'
       )
         continue;
       props[prop] = await this.encrypt(props[prop] as string);

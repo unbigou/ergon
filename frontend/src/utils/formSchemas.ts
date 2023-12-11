@@ -170,4 +170,8 @@ export const productSchema = z.object({
       message: "O preço da promoção precisa ser positivo e menor que 100.",
     })
     .optional(),
+  stock: z.boolean({
+    invalid_type_error: "O estoque precisa ser um booleano.",
+    required_error: "O estoque não pode ser vazio.",
+  }),
 });

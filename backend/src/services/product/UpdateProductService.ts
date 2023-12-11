@@ -1,9 +1,14 @@
 import { Product } from "../../entities/product";
 import { IProductRepository } from "../../interfaces/IProductRepository";
 import { IProductUpdateRequest } from "../../interfaces/IProductInterface";
+import { NotificationService } from "../NotificationService";
+import { IUserRepository } from "../../interfaces/IUserRepository";
 
 export class UpdateProductService {
-  constructor(private productRepo: IProductRepository) {}
+  constructor(
+    private productRepo: IProductRepository,
+    private userRepo: IUserRepository
+  ) {}
   async execute({
     id,
     name,
@@ -19,6 +24,13 @@ export class UpdateProductService {
   }: IProductUpdateRequest): Promise<void> {
     const result = await this.productRepo.findOneProduct(id);
 
+    // notificate if stock goes from false to true
+    console.log(stock, result.stock);
+    if (stock && !result.stock) {
+      let notificate = new NotificationService(this.userRepo, this.productRepo);
+      await notificate.execute(id);
+    }
+
     const product = new Product(
       {
         name: name || result.name,
@@ -31,7 +43,7 @@ export class UpdateProductService {
         sellerId: sellerId || result.sellerId,
         promotionPrice: promotionPrice,
         newPrice: result.newPrice,
-        stock: stock || result.stock,
+        stock: stock === undefined ? result.stock : stock,
         rating: result.rating,
         ratingCont: result.ratingCont,
         ratingMax: result.ratingMax,

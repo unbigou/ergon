@@ -7,7 +7,7 @@ export class UpdateUserController{
     constructor(private userRepo: IUserRepository){}
     async handle(req: Request, res: Response): Promise<Response>{
         const { id } =req.params;
-        const {name, email, password, permissionId,  phoneNumber, cart }: IUser = req.body;
+        const {name, email, password, permissionId,  phoneNumber, cart, toNotificate }: IUser = req.body;
 
         const updateUserService = new UpdateUserService(this.userRepo)
         await updateUserService.execute({
@@ -17,7 +17,8 @@ export class UpdateUserController{
             password,
             permissionId, 
             phoneNumber, 
-            cart
+            cart,
+            toNotificate
         })
 
         return res.status(201).json()

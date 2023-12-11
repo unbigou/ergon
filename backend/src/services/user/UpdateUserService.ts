@@ -17,7 +17,8 @@ export class UpdateUserService {
     permissionId,
     password,
     phoneNumber,
-    cart
+    cart,
+    toNotificate
   }: IUserUpdateRequest): Promise<void> {
     const result = await this.userRepo.findOneUser(id);
 
@@ -25,11 +26,11 @@ export class UpdateUserService {
       throw new AppError("Email inválido");
     }
 
-    if (password && !validatePassword(password)) {
-      throw new AppError(
-        "A senha deve possuir pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial"
-      );
-    }
+    // if (password && !validatePassword(password)) {
+    //   throw new AppError(
+    //     "A senha deve possuir pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial"
+    //   );
+    // }
 
     if (phoneNumber !== "") {
       if (phoneNumber && !validatePhoneNumber(phoneNumber)) {
@@ -44,7 +45,8 @@ export class UpdateUserService {
         password: password || result.password,
         permissionId: permissionId || result.permissionId,
         phoneNumber: phoneNumber || result.phoneNumber,
-        cart: cart || result.cart
+        cart: cart || result.cart,
+        toNotificate: toNotificate || result.toNotificate
       },
       result.id
     );

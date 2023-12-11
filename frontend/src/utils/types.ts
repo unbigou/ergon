@@ -32,7 +32,8 @@ export type user = {
   confirmPassword?: string;
   phoneNumber?: string;
   permissionId: string;
-  cart?: string[]
+  cart?: string[];
+  toNotificate?: string[];
 };
 
 export type userRes = {
@@ -41,7 +42,8 @@ export type userRes = {
   email: string;
   permissionId: string;
   phoneNumber: string;
-  cart?: string[]
+  cart?: string[];
+  toNotificate?: string[];
   createdAt?: Date;
   updatedAt?: Date;
 };

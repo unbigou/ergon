@@ -121,9 +121,8 @@ export default function ProductForm() {
       sellerId: values.sellerId || "",
       newPrice: "",
       promotionPrice: values.promotionPrice?.toString() || "1",
-      stock: true,
+      stock: values.stock,
     } as ProductReq;
-
     try {
       product
         ? await api.put(`/product/${product.id}`, req, {
@@ -312,48 +311,84 @@ export default function ProductForm() {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="file"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Imagem do produto</FormLabel>
-                  <FormControl>
-                    <div className="w-96 m-auto p-8 bg-white rounded-lg shadow-lg">
-                      <div className="text-center flex flex-col items-center border-dashed border-2 border-gray-300 p-4 relative">
-                        {imgUrl ? (
-                          <Image
-                            src={imgUrl}
-                            alt="logo"
-                            width={150}
-                            height={150}
+            <div className="flex justify-between gap-10 items-center">
+              <FormField
+                control={form.control}
+                name="file"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Imagem do produto</FormLabel>
+                    <FormControl>
+                      <div className="w-96 m-auto p-8 bg-white rounded-lg shadow-lg">
+                        <div className="text-center flex flex-col items-center border-dashed border-2 border-gray-300 p-4 relative">
+                          {imgUrl ? (
+                            <Image
+                              src={imgUrl}
+                              alt="logo"
+                              width={150}
+                              height={150}
+                            />
+                          ) : (
+                            <FileUp
+                              className={`w-16 h-16 ${
+                                field.value ? "text-green-600" : "text-gray-500"
+                              }`}
+                            />
+                          )}
+                          <Input
+                            className="block w-full h-full absolute top-0 left-0 bottom-0 right-0 opacity-0 cursor-pointer"
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => {
+                              setImgUrl(
+                                URL.createObjectURL(e.target.files![0])
+                              );
+                              field.onChange([
+                                ...Object.values(e.target.files!),
+                              ]);
+                            }}
                           />
-                        ) : (
-                          <FileUp
-                            className={`w-16 h-16 ${
-                              field.value ? "text-green-600" : "text-gray-500"
-                            }`}
-                          />
-                        )}
-                        <Input
-                          className="block w-full h-full absolute top-0 left-0 bottom-0 right-0 opacity-0 cursor-pointer"
-                          type="file"
-                          accept="image/*"
-                          onChange={(e) => {
-                            setImgUrl(URL.createObjectURL(e.target.files![0]));
-                            field.onChange([...Object.values(e.target.files!)]);
-                          }}
-                        />
+                        </div>
                       </div>
-                    </div>
-                  </FormControl>
-                  <FormDescription>
-                    Imagem do produto que será cadastrado.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    </FormControl>
+                    <FormDescription>
+                      Imagem do produto que será cadastrado.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="stock"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Estoque</FormLabel>
+                    <FormControl>
+                      <Select
+                        onValueChange={(value) => {
+                          field.onChange(value === "true");
+                        }}
+                      >
+                        <FormControl>
+                          <SelectTrigger className="w-[180px]">
+                            <SelectValue placeholder="Selecione uma opção" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="true">Sim</SelectItem>
+                          <SelectItem value="false">Não</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormDescription>
+                      O produto está disponível no estoque?
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             <div className="flex gap-4">
               <FormField
                 control={form.control}

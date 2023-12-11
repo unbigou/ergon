@@ -15,7 +15,7 @@ import Link from "next/link";
 import useAuth from "@/context/useAuth";
 import api from "@/api/api";
 import { useToast } from "../ui/use-toast";
-import { ShoppingCart } from "lucide-react";
+import { Bell, BellDot, ShoppingCart } from "lucide-react";
 
 type CardProps = {
   product: ProductRes;
@@ -24,6 +24,71 @@ type CardProps = {
 const CardsFunc = ({ product }: CardProps) => {
   const { user } = useAuth();
   const { toast } = useToast();
+
+  const addToNotificate = async () => {
+    if (user === undefined) {
+      toast({
+        title: "Você precisa estar logado para ativar notificações",
+        description: "Faça login ou crie uma conta",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (user?.toNotificate?.includes(product.id)) {
+      try {
+        await api.put(
+          `user/${user?.id}`,
+          {
+            toNotificate: user?.toNotificate?.filter((id) => id !== product.id),
+          },
+          {
+            headers: {
+              "x-api-key": process.env.NEXT_PUBLIC_API_KEY,
+            },
+          }
+        );
+
+        toast({
+          title: "Produto removido das notificações",
+        });
+      } catch (error) {
+        console.log(error);
+
+        toast({
+          title: "Erro ao remover produto das notificações",
+          description: "Tente novamente mais tarde",
+          variant: "destructive",
+        });
+      }
+    } else {
+      try {
+        await api.put(
+          `user/${user?.id}`,
+          {
+            toNotificate: [...user?.toNotificate!, product.id],
+          },
+          {
+            headers: {
+              "x-api-key": process.env.NEXT_PUBLIC_API_KEY,
+            },
+          }
+        );
+
+        toast({
+          title: "Produto adicionado às notificações",
+        });
+      } catch (error) {
+        console.log(error);
+
+        toast({
+          title: "Erro ao adicionar produto às notificações",
+          description: "Tente novamente mais tarde",
+          variant: "destructive",
+        });
+      }
+    }
+  };
 
   const addToCart = async () => {
     if (user === undefined) {
@@ -39,7 +104,7 @@ const CardsFunc = ({ product }: CardProps) => {
       await api.put(
         `user/${user?.id}`,
         {
-          cart: [...user?.cart!, product.id]
+          cart: [...user?.cart!, product.id],
         },
         {
           headers: {
@@ -66,13 +131,23 @@ const CardsFunc = ({ product }: CardProps) => {
     <div className="w-fit">
       <Card className="h-full">
         <CardHeader>
-          <CardTitle className="relative">
+          <CardTitle className="relative items-center flex justify-between">
             {product.name}
             {parseInt(product.promotionPrice) > 1 ? (
               <span className="absolute -top-6 z-50 -right-10 bg-red-600 text-white px-2 py-1 rounded-sm origin-center rotate-45">
                 {product.promotionPrice}%
               </span>
             ) : null}
+
+            <Button onClick={addToNotificate} variant="ghost">
+              <BellDot
+                size={24}
+                color="#16633e"
+                fill={
+                  user?.toNotificate?.includes(product.id) ? "#16633e" : "#fff"
+                }
+              />
+            </Button>
           </CardTitle>
           <CardDescription>{product.type}</CardDescription>
         </CardHeader>

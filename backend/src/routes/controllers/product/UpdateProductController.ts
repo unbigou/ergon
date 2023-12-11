@@ -2,9 +2,13 @@ import { Request, Response } from "express";
 import { IProductRepository } from "../../../interfaces/IProductRepository";
 import { IProduct } from "../../../interfaces/IProductInterface";
 import { UpdateProductService } from "../../../services/product/UpdateProductService";
+import { IUserRepository } from "../../../interfaces/IUserRepository";
 
 export class UpdateProductController {
-  constructor(private productRepo: IProductRepository) {}
+  constructor(
+    private productRepo: IProductRepository,
+    private userRepo: IUserRepository
+  ) {}
   async handle(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
     const {
@@ -20,7 +24,11 @@ export class UpdateProductController {
       sellerId,
     }: IProduct = req.body;
 
-    const updateProductService = new UpdateProductService(this.productRepo);
+    const updateProductService = new UpdateProductService(
+      this.productRepo,
+      this.userRepo
+    );
+
     await updateProductService.execute({
       id,
       name,

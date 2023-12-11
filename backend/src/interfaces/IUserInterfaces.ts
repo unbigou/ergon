@@ -34,6 +34,7 @@ export interface IUserUpdateRequest{
     permissionId: string;
     phoneNumber: string;
     cart: string[];
+    toNotificate?: string[];
 }
 
 export interface IUserDeleteRequest{
