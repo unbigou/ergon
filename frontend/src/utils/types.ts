@@ -32,14 +32,18 @@ export type user = {
   confirmPassword?: string;
   phoneNumber?: string;
   permissionId: string;
+  cart?: string[]
 };
 
 export type userRes = {
   id: string;
   name: string;
   email: string;
-  phoneNumber: string;
   permissionId: string;
+  phoneNumber: string;
+  cart?: string[]
+  createdAt?: Date;
+  updatedAt?: Date;
 };
 
 export type login = {

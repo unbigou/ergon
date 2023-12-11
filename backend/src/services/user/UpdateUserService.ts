@@ -36,7 +36,7 @@ export class UpdateUserService {
         throw new AppError("Telefone inválido");
       }
     }
-
+    
     const user = new User(
       {
         name: name || result.name,

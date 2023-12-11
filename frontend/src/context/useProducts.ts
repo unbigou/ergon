@@ -17,7 +17,7 @@ function useProducts() {
   return {
     products: data,
     promotionProducts: data?.filter(
-      (product) => product.promotionPrice !== "1"
+      (product) => parseFloat(product.promotionPrice) > 1
     ),
     isLoading,
     isError: error,

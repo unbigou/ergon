@@ -24,7 +24,7 @@ export default function MainLayout({
         {permission === "admin" ? <Navbar /> : null}
         <div className="overflow-y-auto w-full bg-gray-100">{children}</div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </section>
   );
 }

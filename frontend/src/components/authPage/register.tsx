@@ -18,16 +18,19 @@ import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { useToast } from "../ui/use-toast";
 import api from "@/api/api";
+import usePermissions from "@/context/usePermissions";
 
 const Register = () => {
   const [seePassword, setSeePassword] = useState(false);
   const [seeConfirmPassword, setSeeConfirmPassword] = useState(false);
 
   const { toast } = useToast();
+  const { permissions } = usePermissions();
 
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
       confirmEmail: "",
@@ -66,8 +69,10 @@ const Register = () => {
           password: data.password,
           confirmPassword: data.confirmPassword,
           phoneNumber: "",
-          permissionId: "651116cc-7a79-47d4-867b-1c7d8e8fb326",
-          name: "", 
+          permissionId: permissions?.find(
+            (permission) => permission.name === "client"
+          )?.id, 
+          name: data.name,
         },
         {
           headers: {
@@ -92,6 +97,23 @@ const Register = () => {
           Cadastre-se!
         </h1>
         <div className="flex flex-col gap-4">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nome</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    className="shadow-md"
+                    placeholder="Digite seu nome"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <FormField
             control={form.control}
             name="email"
