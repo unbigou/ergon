@@ -5,6 +5,7 @@ export interface IUser {
     permissionId: string;
     password: string;
     phoneNumber: string;
+    cart: string[]
     createdAt?: Date;
     updatedAt?: Date;
 }
@@ -17,6 +18,7 @@ export interface IUserCreateRequest {
     permissionId: string;
     confirmPassword: string;
     phoneNumber: string;
+    cart: string[];
 }
 
 export interface IUserGetRequest{
@@ -30,6 +32,7 @@ export interface IUserUpdateRequest{
     password: string;
     permissionId: string;
     phoneNumber: string;
+    cart: string[];
 }
 
 export interface IUserDeleteRequest{

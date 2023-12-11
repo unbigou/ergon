@@ -17,6 +17,7 @@ export class UpdateUserService {
     permissionId,
     password,
     phoneNumber,
+    cart
   }: IUserUpdateRequest): Promise<void> {
     const result = await this.userRepo.findOneUser(id);
 
@@ -35,7 +36,7 @@ export class UpdateUserService {
         throw new AppError("Telefone inválido");
       }
     }
-
+    
     const user = new User(
       {
         name: name || result.name,
@@ -43,6 +44,7 @@ export class UpdateUserService {
         password: password || result.password,
         permissionId: permissionId || result.permissionId,
         phoneNumber: phoneNumber || result.phoneNumber,
+        cart: cart || result.cart
       },
       result.id
     );

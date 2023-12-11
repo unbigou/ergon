@@ -17,6 +17,7 @@ export class CreateUserController {
       confirmEmail,
       confirmPassword,
       phoneNumber,
+      cart
     } = req.body;
 
     const createUserService = new CreateUserService(
@@ -32,6 +33,7 @@ export class CreateUserController {
       confirmEmail,
       confirmPassword,
       phoneNumber,
+      cart
     });
 
     return res.status(201).json(user);

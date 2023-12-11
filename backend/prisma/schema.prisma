@@ -28,9 +28,10 @@ model user {
     createdAt DateTime @default(now())
     updatedAt DateTime @default(now())
     permissions  permission @relation(fields: [permissionId], references: [id])
-  permissionId String     @db.Uuid
-  products product[]
-  reviews review[]
+    permissionId String     @db.Uuid
+    products product[]
+    reviews review[]
+    cart String[] @db.VarChar(255) 
 }
 
 model product {

@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import useProducts from "@/context/useProducts";
 import useAuth from "@/context/useAuth";
+import CartDrawer from "./CartDrawer";
 
 export default function Header() {
   const [search, setSearch] = useState("");
@@ -89,13 +90,7 @@ export default function Header() {
             Login
           </Button>
         )}
-        <Button
-          variant={"outline"}
-          className="flex gap-4 border border-blueGreen"
-        >
-          <ShoppingCart size={24} />
-          Carrinho
-        </Button>
+        <CartDrawer />
       </div>
     </header>
   );

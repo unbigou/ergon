@@ -32,7 +32,8 @@ export class UserRepository implements IUserRepository {
   }
 
   async update(props: IUser, id: string): Promise<void> {
-    props = await this.cryptoRepo.useEncryptoUser(props);
+    // props = await this.cryptoRepo.useEncryptoUser(props);
+    console.log(props)
     await prisma.user.update({
       where: { id },
       data: props,

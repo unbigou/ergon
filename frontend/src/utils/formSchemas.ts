@@ -23,6 +23,17 @@ export const loginSchema = z.object({
 });
 
 export const registerSchema = z.object({
+  name: z
+    .string({
+      invalid_type_error: "O nome precisa ser um texto.",
+      required_error: "O nome não pode ser vazio.",
+    })
+    .min(3, {
+      message: "O nome precisa ter no mínimo 3 caracteres.",
+    })
+    .max(255, {
+      message: "O nome precisa ter no máximo 255 caracteres.",
+    }),
   email: z
     .string({
       invalid_type_error: "O email precisa ser um texto.",
@@ -155,10 +166,8 @@ export const productSchema = z.object({
       invalid_type_error: "O preço da promoção precisa ser um número.",
       required_error: "O preço da promoção não pode ser vazio.",
     })
-    .positive({
-      message: "O preço da promoção precisa ser positivo.",
-    })
-    .refine((val) => val > 0 && val < 100, {
+    .refine((val) => val >= 0 && val < 100, {
       message: "O preço da promoção precisa ser positivo e menor que 100.",
-    }).optional(),
+    })
+    .optional(),
 });

@@ -1,10 +1,7 @@
 import {
-  validateBirthDate,
   validateConfimPassword,
   validateConfirmEmail,
-  validateCpf,
   validateEmail,
-  validatePassword,
   validatePhoneNumber,
 } from "../../utils/validate";
 import { User } from "../../entities/user";
@@ -26,6 +23,7 @@ export class CreateUserService {
     phoneNumber,
     confirmEmail,
     confirmPassword,
+    cart
   }: IUserCreateRequest): Promise<IUser> {
     if (!validateEmail(email)) {
       throw new AppError("Email inválido");
@@ -65,6 +63,7 @@ export class CreateUserService {
       password,
       permissionId,
       phoneNumber,
+      cart
     });
 
     let userdata = user.toJson();
