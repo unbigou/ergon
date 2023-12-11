@@ -6,6 +6,7 @@ export interface IUser {
     password: string;
     phoneNumber: string;
     cart: string[]
+    toNotificate?: string[];
     createdAt?: Date;
     updatedAt?: Date;
 }

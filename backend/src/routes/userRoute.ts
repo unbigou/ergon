@@ -15,7 +15,7 @@ import { CryptoRepository } from "../repositories/CryptoRepository";
 export const userRoute = Router();
 
 const cryptoRepo: ICryptoRepository = new CryptoRepository()
-const userRepo: IUserRepository = new UserRepository(cryptoRepo)
+export const userRepo: IUserRepository = new UserRepository(cryptoRepo)
 const hashRepo: IHashRepository = new HashRepository()
 const createUserController = new CreateUserController(userRepo, hashRepo)
 const getUserController = new GetUserController(userRepo)

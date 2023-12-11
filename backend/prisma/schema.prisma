@@ -32,6 +32,7 @@ model user {
     products product[]
     reviews review[]
     cart String[] @db.VarChar(255) 
+    toNotificate String[]
 }
 
 model product {

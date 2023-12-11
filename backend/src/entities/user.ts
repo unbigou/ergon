@@ -9,6 +9,7 @@ export class User{
     password:    IUser['password'];
     phoneNumber: IUser['phoneNumber'];
     cart: IUser['cart'];
+    toNotificate?: IUser['toNotificate']
     createdAt?: IUser['createdAt'];
     updatedAt?: IUser['updatedAt'];
 
@@ -20,6 +21,7 @@ export class User{
         this.password = props.password;
         this.phoneNumber = props.phoneNumber || '';
         this.cart = props.cart || [];
+        this.toNotificate = props.toNotificate;
         this.createdAt = props.createdAt || new Date();
         this.updatedAt = new Date();
     }
@@ -33,6 +35,7 @@ export class User{
                 permissionId: this.permissions,
                 phoneNumber: this.phoneNumber,
                 cart: this.cart,
+                toNotificate: this.toNotificate,
                 createdAt: this.createdAt,
                 updatedAt: this.updatedAt
             }

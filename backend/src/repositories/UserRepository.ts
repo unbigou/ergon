@@ -52,4 +52,14 @@ export class UserRepository implements IUserRepository {
     });
     return result;
   }
+
+  async findByProduct(productId: string): Promise<IUser[]> {
+      return await prisma.user.findMany({
+        where: {
+            toNotificate: {
+                has: productId
+            }
+        }
+      })
+  }
 }

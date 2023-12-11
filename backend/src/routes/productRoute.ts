@@ -7,6 +7,7 @@ import { DeleteProductController } from "./controllers/product/DeleteProductCont
 import { GetByTypeProductController } from "./controllers/product/GetByTypeProductController";
 import { resolveController } from "../adapters/resolverController";
 import { ProductRepository } from "../repositories/ProductRepository";
+import { userRepo } from "./userRoute";
 
 export const productRoute = Router();
 
@@ -14,7 +15,7 @@ const productRepo = new ProductRepository()
 const createProductController = new CreateProductController(productRepo)
 const getProductController = new GetProductController(productRepo)
 const listProductController = new ListProductController(productRepo)
-const updateProductController = new UpdateProductController(productRepo)
+const updateProductController = new UpdateProductController(productRepo, userRepo)
 const deleteProductController = new DeleteProductController(productRepo)
 const getByTypeProductController = new GetByTypeProductController(productRepo)
 
