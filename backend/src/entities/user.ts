@@ -8,6 +8,7 @@ export class User{
     permissions: IUser['permissionId'];
     password:    IUser['password'];
     phoneNumber: IUser['phoneNumber'];
+    cart: IUser['cart'];
     createdAt?: IUser['createdAt'];
     updatedAt?: IUser['updatedAt'];
 
@@ -18,6 +19,7 @@ export class User{
         this.permissions = props.permissionId;
         this.password = props.password;
         this.phoneNumber = props.phoneNumber || '';
+        this.cart = props.cart || [];
         this.createdAt = props.createdAt || new Date();
         this.updatedAt = new Date();
     }
@@ -30,6 +32,7 @@ export class User{
                 password: this.password,
                 permissionId: this.permissions,
                 phoneNumber: this.phoneNumber,
+                cart: this.cart,
                 createdAt: this.createdAt,
                 updatedAt: this.updatedAt
             }

@@ -17,6 +17,7 @@ export class UpdateUserService {
     permissionId,
     password,
     phoneNumber,
+    cart
   }: IUserUpdateRequest): Promise<void> {
     const result = await this.userRepo.findOneUser(id);
 
@@ -43,6 +44,7 @@ export class UpdateUserService {
         password: password || result.password,
         permissionId: permissionId || result.permissionId,
         phoneNumber: phoneNumber || result.phoneNumber,
+        cart: cart || result.cart
       },
       result.id
     );

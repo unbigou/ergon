@@ -5,6 +5,7 @@ export interface IUser {
     permissionId: string;
     password: string;
     phoneNumber: string;
+    cart: string[]
     createdAt?: Date;
     updatedAt?: Date;
 }
