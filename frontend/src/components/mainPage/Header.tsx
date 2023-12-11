@@ -11,12 +11,21 @@ import Link from "next/link";
 import useProducts from "@/context/useProducts";
 import useAuth from "@/context/useAuth";
 import CartDrawer from "./CartDrawer";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function Header() {
   const [search, setSearch] = useState("");
   const [token, setToken] = useState("");
   const { setFilteredProducts } = useFilterProducts();
-  const { products } = useProducts();
+  const { products, productTypes } = useProducts();
   const { logout } = useAuth();
 
   const router = useRouter();
@@ -67,6 +76,32 @@ export default function Header() {
             }}
           />
         </form>
+        <Select
+          onValueChange={(value) => {
+            setFilteredProducts(
+              value === "all"
+                ? false
+                : products!.filter((product) => product.type === value)
+            );
+          }}
+        >
+          <SelectTrigger className="w-fit">
+            <SelectValue placeholder="" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Selecione um tipo de produto</SelectLabel>
+              <SelectItem value={"all"} onClick={() => {}}>
+                Todos
+              </SelectItem>
+              {productTypes?.map((type) => (
+                <SelectItem key={type} value={type} onClick={() => {}}>
+                  {type}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
       </div>
       <div className="flex items-center gap-4">
         {token ? (

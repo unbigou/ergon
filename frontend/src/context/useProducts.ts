@@ -19,6 +19,7 @@ function useProducts() {
     promotionProducts: data?.filter(
       (product) => parseFloat(product.promotionPrice) > 1
     ),
+    productTypes: data?.map((product) => product.type).filter((type) => type),
     isLoading,
     isError: error,
   };
