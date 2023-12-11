@@ -5,6 +5,7 @@ import { userRoute } from './userRoute';
 import { productRoute } from './productRoute';
 import { reviewRoute } from './reviewRoutes';
 import { permRoute } from './permissionRoute';
+import { contactRoute } from './contactInfoRoute';
 
 export const route = express.Router();
 
@@ -14,3 +15,4 @@ route.use('/user', userRoute);
 route.use('/product', productRoute);
 route.use('/review', reviewRoute);
 route.use('/permission', permRoute);
+route.use('/contactInfo', contactRoute);
