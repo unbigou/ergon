@@ -10,8 +10,6 @@ export class FindContactInfoController{
         const findContactInfoService = new FindContactInfoService(this.contactRepo)
         const result = await findContactInfoService.execute()
 
-        res.json(result)
-
-        return res.status(201).send()
+        return res.status(201).json(result)
     }
 }
