@@ -67,3 +67,12 @@ model review{
   productId String @db.Uuid
 }
 
+model ContactInfo{
+  id String @id @db.VarChar(255)
+  email String @db.VarChar(255)
+  phoneNumber String @db.VarChar(255)
+  address String @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
